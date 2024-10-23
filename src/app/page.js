@@ -9,6 +9,7 @@ import setasimples from '../assets/Right.svg'
 export default function Home() {
   return (
     <div className="container h-[100vh] w-[100vw]">
+      {/* Header */}
       <nav className="flex pt-4 justify-around items-center w-[100vw]">
           <div>
             <Image className="w-[106px]" src={logo} alt="Logo"/>
@@ -28,6 +29,7 @@ export default function Home() {
           </div>
       </nav>
 
+      {/* HeroSection */}
       <div className="flex justify-center items-center w-[100vw] h-[80vh]">
           <div className="flex flex-col flex-1 pl-60"> 
             <h1 className="text-[80px] w-[100%] leading-[80px] font-bold  tracking-[-.03em]">
@@ -48,6 +50,7 @@ export default function Home() {
           </div>
       </div>
 
+      {/* Section 2 - chamada cadastro */}
       <div className="w-[100vw]"> 
         <div className="flex items-center justify-center w-[100vw] text-[35px] gap-2 font-bold "> 
           <p>Venha <span className="text-second-pink" >fazer parte</span> do nosso time</p>
@@ -76,9 +79,20 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
+      {/* Section Sobre nós / contato / dúvidas */}
+      <div className="w-[100vw] h-[60vh]">
+        <a href="../pages/login/page.js"> login </a>
+
+      </div>
+
+      {/* Footer */}
+      <div className="w-[100vw] h-[40vh] bg-second-green">
 
 
+      </div>
+
+    
 
     </div>
     
