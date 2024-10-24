@@ -8,7 +8,7 @@ import setasimples from '../assets/Right.svg'
 
 export default function Home() {
   return (
-    <div className="container h-[100vh] w-[100vw]">
+    <div className="container h-[100vh] w-[100vw] min-w-screen">
       {/* Header */}
       <nav className="flex pt-4 justify-around items-center w-[100vw]">
           <div>
@@ -24,7 +24,7 @@ export default function Home() {
           </div>
 
           <div className="flex gap-4 text-[14px]"> 
-            <button className="border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"><a> Cadastre-se </a></button>
+            <button className="border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"><a href="/"> Cadastre-se </a></button>
             <button className="bg-second-pink px-14 py-1 rounded-md font-semibold text-second-yellow hover:scale-105 transition	"><a> Entrar </a></button>
           </div>
       </nav>
