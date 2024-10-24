@@ -5,4 +5,6 @@
 body {
     @apply bg-white;
     @apply text-text-bro;
+    @apply w-[100vw];
+    @apply h-[100vw];
 }

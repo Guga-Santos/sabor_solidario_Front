@@ -82,7 +82,7 @@ export default function Home() {
 
       {/* Section Sobre nós / contato / dúvidas */}
       <div className="w-[100vw] h-[60vh]">
-        <a href="../pages/login/page.js"> login </a>
+        
 
       </div>
 
