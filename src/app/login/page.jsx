@@ -13,13 +13,28 @@ export default function Login() {
 
         // função para fazer o envio do formulario
         const handleSubmit = (event) => {
-            event.preventDefault();
-            // esse evento ^, previne que o form seja enviado, anulando o carregamento da pagina, logo, conseguimos monitorar os dados que são passados pelo formulario 
+            //event previne que o form seja enviado e a page atualizada, logo, conseguimos monitorar os dados que são passados pelo formulario 
+            event.preventDefault()
 
-            console.log(email, password)
-            console.log("envio")
+            // Expressões regulares para validação dos dados do input
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // Exemplo de regex para senha forte
+
+            // Validando se o email está conforme padrão estabelecido no emailRegex, caso esteja diferente mostra o alert com a negativa
+            if (!emailRegex.test(email)) {
+                alert("Por favor, insira um email válido.")
+                return;
+           }
+
+            // Validando se a senha está conforme padrão estabelecido no passwordRegex, caso esteja diferente mostra o alert com a negativa
+            if (!passwordRegex.test(password)) {
+                alert("A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.");
+                return;
+            }
+            // Test1234
+            console.log("Dados válidos:", email, password);
         }
-    
+
 
         return <div className="flex w-[100vw] h-[100vh]">   
             <div className="flex flex-col w-[30%] justify-evenly items-center bg-second-yellow text-center">
@@ -32,17 +47,18 @@ export default function Login() {
 
                 <div className="font-extrabold text-[65px] leading-[1]"> Bem-vindo de volta!</div>
 
-                <div className="flex flex-col text-[14px]"> 
-                    <p>Em caso de dúvidas, <span className="font-bold">instruções</span> para login abaixo:</p>
-                    <p> Lorem ipsum dolor sit.</p>
-                    <p> Lorem ipsum dolor sit.</p>
-                    <p> Lorem ipsum dolor sit.</p>
-                    <p> Lorem ipsum dolor sit.</p>
-                </div>
+                <ul className="flex flex-col text-[14px] w-[80%] text-start gap-2  list-disc leading-4"> 
+                    <p>Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
+                    <li> Digite obrigatoriamente o Email e Senha</li>
+                    <li> Estrutura email: exemplo@exemplo.com</li>
+                    <li> Estrutura senhar: Letras maiúsculas, minúsculas e números. </li>
+                    <li> Ao esquecer a senha, clique em "recuperar senha" </li>
+                    <li> Caso não tenha cadastro, clique logo abaixo em "clique para cadastrar". </li>
+                </ul>
 
                 <div className="text-[14px]">
                     <p>Se você <span className="font-bold">ainda</span> não tem uma conta,</p>
-                    <p className="text-second-green font-bold hover:underline"><a href="#">clique aqui.</a></p>
+                    <p className="text-second-green font-bold hover:underline"><a href="#">clique para cadastrar.</a></p>
                 </div>
 
             </div>
@@ -78,7 +94,7 @@ export default function Login() {
 
                     <div className="flex justify-between text-xs w-[450px] mb-10">  
                         <label className="flex gap-1"><input type="checkbox" /> Lembrar de mim</label>
-                        <p> Esqueceu sua senha? <a href="#"><span className="font-bold text-second-green hover:underline">Clique aqui.</span></a></p>
+                        <p> Esqueceu sua senha? <a href="#"><span className="font-bold text-second-green hover:underline">Recuperar senha.</span></a></p>
                     </div>
 
                     <button className="w-[450px] bg-second-pink text-white h-10 rounded-lg transition hover:opacity-85">Entrar</button>
