@@ -5,6 +5,10 @@ import Image from "next/image";
 import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
 
+
+// FALTA LIGAR COM O BACK 
+
+
 export default function Login() {
  
         // criação de variavel (vazias ('')), para receber os valores do input digitado pelo user
@@ -37,30 +41,28 @@ export default function Login() {
 
 
         return <div className="flex w-[100vw] h-[100vh]">   
-            <div className="flex flex-col w-[30%] justify-evenly items-center bg-second-yellow text-center">
-                
+            <div className="flex flex-col w-[40%] justify-evenly items-center bg-second-yellow text-center">
                 <div className="absolute left-7 top-8 w-7"><a><Image src={voltar} /></a></div>
 
-                <div>
-                    <Image className="w-[150px]" src={logo} alt="Logo" />
-                </div>
+                    <a href="/">
+                        <Image className="w-[150px]" src={logo} alt="Logo" />
+                    </a>
 
                 <div className="font-extrabold text-[65px] leading-[1]"> Bem-vindo de volta!</div>
 
                 <ul className="flex flex-col text-[14px] w-[80%] text-start gap-2  list-disc leading-4"> 
-                    <p>Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
+                    <p className="pb-2">Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
                     <li> Digite obrigatoriamente o Email e Senha</li>
                     <li> Estrutura email: exemplo@exemplo.com</li>
                     <li> Estrutura senhar: Letras maiúsculas, minúsculas e números. </li>
                     <li> Ao esquecer a senha, clique em "recuperar senha" </li>
-                    <li> Caso não tenha cadastro, clique logo abaixo em "clique para cadastrar". </li>
+                    <li> Caso não tenha cadastro, clique logo abaixo em "fazer cadastro". </li>
                 </ul>
 
                 <div className="text-[14px]">
                     <p>Se você <span className="font-bold">ainda</span> não tem uma conta,</p>
-                    <p className="text-second-green font-bold hover:underline"><a href="#">clique para cadastrar.</a></p>
+                    <p className="text-second-green font-bold hover:underline"><a href="/cadastro">Fazer cadastro.</a></p>
                 </div>
-
             </div>
 
             <div className="flex flex-col justify-center items-center w-[100vw] h-[100vh] gap-5">
@@ -94,13 +96,11 @@ export default function Login() {
 
                     <div className="flex justify-between text-xs w-[450px] mb-10">  
                         <label className="flex gap-1"><input type="checkbox" /> Lembrar de mim</label>
-                        <p> Esqueceu sua senha? <a href="#"><span className="font-bold text-second-green hover:underline">Recuperar senha.</span></a></p>
+                        <p> Esqueceu sua senha? <a href="/recuperarSenha"><span className="font-bold text-second-green hover:underline">Recuperar senha.</span></a></p>
                     </div>
 
                     <button className="w-[450px] bg-second-pink text-white h-10 rounded-lg transition hover:opacity-85">Entrar</button>
                 </form>
-
             </div>
-            
         </div>
 }

@@ -17,15 +17,15 @@ export default function Home() {
 
           <div>
             <ul className="flex text-center gap-8 text-1xl font-semibold">
-              <li><a className="hover:text-second-pink transition" href="#"> Home </a></li>
+              <li><a className="hover:text-second-pink transition" href="/"> Home </a></li>
               <li><a className="hover:text-second-pink transition" href="#"> Sobre nós </a></li>
               <li><a className="hover:text-second-pink transition" href="#"> Dúvidas </a></li>
             </ul>
           </div>
 
           <div className="flex gap-4 text-[14px]"> 
-            <button className="border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"><a href="/"> Cadastre-se </a></button>
-            <button className="bg-second-pink px-14 py-1 rounded-md font-semibold text-second-yellow hover:scale-105 transition	"><a> Entrar </a></button>
+          <a href="/cadastro"><button className="border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"> Cadastre-se</button></a>
+            <a href="/login"><button className="bg-second-pink px-14 py-1 rounded-md font-semibold text-second-yellow hover:scale-105 transition	"> Entrar</button></a>
           </div>
       </nav>
 
@@ -39,10 +39,12 @@ export default function Home() {
             <p className="font-medium text-[20px] mt-4">Sua doação nos ajuda a salvar o mundo.</p>
             <p className="font-bold text-[20px]">ainda <span className="text-second-pink">não</span> tem cadastro?</p>
 
-            <div className="flex w-[220] h-[50] items-center justify-center gap-4 border-solid border-2 border-second-pink rounded-[50px] font-bold hover:scale-105 transition mt-4">
-            <button><a> Cadastre-se </a></button>
-            <Image src={seta} />
-            </div>
+            <a href="/cadastro">
+              <div className="flex w-[220] h-[50] items-center justify-center gap-4 border-solid border-2 border-second-pink rounded-[50px] font-bold hover:scale-105 transition mt-4">
+              <button> Cadastre-se </button>
+              <Image src={seta} />
+              </div>
+            </a>
           </div>
 
           <div className="flex flex-1 items-end mr-20">
@@ -59,20 +61,21 @@ export default function Home() {
 
 
         <div className="w-[100vw] h-[35vh] flex pt-4 gap-2 rotate-20 ">
-          <div className="flex flex-1 bg-second-yellow items-center justify-center gap-5"> 
+           <div className="flex flex-1 bg-second-yellow items-center justify-center gap-5"> 
             <Image src={imgvolunt} />
-            <div className="flex flex-col items-start gap-2 w-[35%]"> 
-              <p className="font-bold text-[30px] leading-[35px]"> Junte-se ao nosso grupo de <span className="text-second-pink">voluntários</span>! </p>
-              <button className=" flex justify-center items-center gap-2 border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"><a>Clica e faça parte </a>
-              <Image src={setasimples} /> </button>
-            </div>
+            
+              <div className="flex flex-col items-start gap-2 w-[35%]"> 
+                <p className="font-bold text-[30px] leading-[35px]"> Junte-se ao nosso grupo de <span className="text-second-pink">voluntários</span>! </p>
+                <a href="/cadastroVoluntario"><button className=" flex justify-center items-center gap-2 border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"><a>Clica e faça parte </a>
+                <Image src={setasimples} /> </button> </a>
+              </div>
           </div>
           
           <div className="flex flex-1 bg-second-yellow gap-2 justify-center items-center"> 
             <div className="flex flex-col items-end gap-2 w-[40%] text-end justify-center"> 
               <p className="font-bold text-[30px] leading-[35px]"> Seja uma das nossas <span className="text-second-pink">empresas</span> parceiras! </p>
-              <button className=" flex justify-center items-center gap-2 border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"><a>Clica e faça parte </a>
-              <Image src={setasimples} /> </button>
+              <a href="/cadastroRestaurante"> <button className=" flex justify-center items-center gap-2 border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"><a>Clica e faça parte </a>
+              <Image src={setasimples} /> </button> </a>
             </div>
             
             <Image src={imgrestaur} />
