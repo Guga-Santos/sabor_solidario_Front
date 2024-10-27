@@ -25,7 +25,7 @@ export default function Home() {
 
           <div className="flex gap-4 text-[14px]"> 
           <a href="/cadastro"><button className="border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition"> Cadastre-se</button></a>
-            <a href="/login"><button className="bg-second-pink px-14 py-1 rounded-md font-semibold text-second-yellow hover:scale-105 transition	"> Entrar</button></a>
+            <a href="/login"><button className="bg-second-pink px-14 py-1 rounded-md font-semibold text-second-yellow hover:scale-105 hover:bg-second-pink-hover transition	"> Entrar</button></a>
           </div>
       </nav>
 
@@ -39,8 +39,9 @@ export default function Home() {
             <p className="font-medium text-[20px] mt-4">Sua doação nos ajuda a salvar o mundo.</p>
             <p className="font-bold text-[20px]">ainda <span className="text-second-pink">não</span> tem cadastro?</p>
 
+            {/* alterar efeito do hover */}
             <a href="/cadastro">
-              <div className="flex w-[220] h-[50] items-center justify-center gap-4 border-solid border-2 border-second-pink rounded-[50px] font-bold hover:scale-105 transition mt-4">
+              <div className="flex w-[220] h-[50] items-center justify-center gap-4 border-solid border-2 border-second-pink rounded-[50px] font-bold hover:scale-105 hover:bg-second-pink hover:border-second-pink-hover hover:text-white transition mt-4">
               <button> Cadastre-se </button>
               <Image src={seta} />
               </div>

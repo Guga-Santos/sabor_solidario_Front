@@ -10,7 +10,9 @@ module.exports = {
       colors: {
         'text-bro': '#5D576B',
         'second-green': '#99E1D9',
+        'second-green-hover': '#62D1C5',
         'second-pink': '#F7567C',
+        'second-pink-hover': '#ED436B',
         'second-yellow': '#FFFAE3',
         'second-gray': '#FCFCFC',
         'text-gray': '#7A7786',

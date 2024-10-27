@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
+import fotoVoluntario from '../../assets/cadastro-voluntario-foto.jpg'
+import fotoRestaurante from '../../assets/cadastro-restaurante-foto.jpg'
 
 export default function Cadastro() {
     return <div className="flex w-[100vw] h-[100vh]">
@@ -12,23 +14,42 @@ export default function Cadastro() {
                 <div>Você pode <span className="font-bold">ajudar</span> a causa clicando nos botões abaixo:</div>
             </div>
 
-            <div className="w-[70%] h-96 flex items-center justify-center flex gap-32  bg-second-yellow rounded-xl"> 
-                <div className="flex flex-col gap-5 items-center "> 
-                    <p className=" font-extrabold text-4xl">Restaurante</p>
-                    <p>Deseja doar alimentos</p>
-                    <a href="/cadastroRestaurante"> 
-                    <button className=" w-[200px] bg-second-green text-white h-10 rounded-lg transition hover:opacity-85 font-bold">Cadastrar</button>
+            <div className="w-[70%] h-96 flex items-center justify-center flex gap-10">
+                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-second-yellowk">
+                    <a href="/cadastroRestaurante">
+                        <Image className="rounded-t-lg w-96" src={fotoRestaurante} alt="Imagens doares" />
                     </a>
+                    <div className="p-5">
+                        <a href="/cadastroRestaurante">
+                            <h5 className="mb-2 text-3xl font-bold dark:text-text-bro">Restaurante</h5>
+                        </a>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                        <a href="/cadastroRestaurante" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-second-green rounded-lg hover:bg-second-green-hover">
+                            Clique no card e se cadastre
+                            <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
-
-                <div className="w-[2px] h-[70%] bg-text-bro rounded-sm"></div>
-
-                <div className="flex flex-col gap-5 items-center"> 
-                    <p className=" font-extrabold text-4xl">Voluntário</p>
-                    <p>Deseja entregar as doações</p>
-                    <a href="cadastroVoluntario"> 
-                    <button className=" w-[200px] bg-second-pink text-white h-10 rounded-lg transition hover:opacity-85 font-bold">Cadastrar</button>
+                <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-second-yellowk">
+                    <a href="/cadastroVoluntario">
+                        <Image className="rounded-t-lg w-96" src={fotoVoluntario} alt="Imagens doares" />
                     </a>
+                    <div className="p-5">
+                        <a href="/cadastroVoluntario">
+                            <h5 className="mb-2 text-3xl font-bold dark:text-text-bro">Voluntário</h5>
+                        </a>
+                        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+                        <a href="/cadastroVoluntario" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-second-pink rounded-lg hover:bg-second-pink-hover">
+                            Clique no card e se cadastre
+                            <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -40,7 +61,7 @@ export default function Cadastro() {
                 <Image className="w-[150px]" src={logo} alt="Logo" />
             </a>
 
-            <div className="font-extrabold text-[65px] leading-[1]"> Seja muito Bem-vindo!</div>
+            <div className="font-extrabold text-[60px] px-4 leading-[1]"> Seja muito Bem-vindo!</div>
 
             <ul className="flex flex-col text-[14px] w-[80%] text-start gap-2  list-disc leading-4">
                 <p className="pb-2">Siga as <span className="font-bold">instruções</span> abaixo em caso de dúvidas:</p>

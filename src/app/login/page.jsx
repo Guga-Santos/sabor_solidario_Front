@@ -78,7 +78,7 @@ export default function Login() {
 
                         {/* pegar o valor sempre atualizado, pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                         <input onChange={(e) => setEmail(e.target.value)} 
-                        className="flex h-10 border-solid border-2 border-text-bro rounded-md outline-none p-4 focus:border-second-pink" 
+                        className="flex h-10 border-solid border-2 border-text-bro rounded-md outline-none p-4 focus:border-second-pink text-xs" 
                         type="email" 
                         placeholder="Digite aqui seu e-mail" />
                     </div>
@@ -89,7 +89,7 @@ export default function Login() {
 
                         {/* o evento pega o valor sempre atualizado. Pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                         <input onChange={(e) => setPassword(e.target.value)} 
-                        className="flex h-10 border-solid border-2 border-text-bro rounded-md outline-none p-4 focus:border-second-pink" 
+                        className="flex h-10 border-solid border-2 border-text-bro rounded-md outline-none p-4 focus:border-second-pink text-xs" 
                         type="password" 
                         placeholder="Digite aqui sua senha" />
                     </div>
