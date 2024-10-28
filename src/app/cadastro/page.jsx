@@ -4,6 +4,7 @@ import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
 import fotoVoluntario from '../../assets/cadastro-voluntario-foto.jpg'
 import fotoRestaurante from '../../assets/cadastro-restaurante-foto.jpg'
+import Link from "next/link";
 
 export default function Cadastro() {
     return <div className="flex w-[100vw] h-[100vh]">
@@ -28,7 +29,7 @@ export default function Cadastro() {
                         <a href="/cadastroRestaurante" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-second-green rounded-lg hover:bg-second-green-hover">
                             Clique no card e se cadastre
                             <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                             </svg>
                         </a>
                     </div>
@@ -46,7 +47,7 @@ export default function Cadastro() {
                         <a href="/cadastroVoluntario" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-second-pink rounded-lg hover:bg-second-pink-hover">
                             Clique no card e se cadastre
                             <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" strokeLinecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                             </svg>
                         </a>
                     </div>
@@ -55,11 +56,13 @@ export default function Cadastro() {
         </div>
 
         <div className="flex flex-col w-[40%] justify-evenly items-center bg-second-yellow text-center">
-            <div className="absolute left-7 top-8 w-7"><a><Image src={voltar} /></a></div>
+            <div className="absolute left-7 top-8 w-7">
+                <button><Image src={voltar} alt="seta voltar" /></button>
+            </div>
 
-            <a href="/">
+            <Link href="/">
                 <Image className="w-[150px]" src={logo} alt="Logo" />
-            </a>
+            </Link>
 
             <div className="font-extrabold text-[60px] px-4 leading-[1]"> Seja muito Bem-vindo!</div>
 

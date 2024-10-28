@@ -8,8 +8,8 @@ import React from "react";
 
 export default function CadastroRestaurante() {
     return <div className="flex w-screen h-screen">
-        <div className="flex flex-col w-[40%] justify-evenly items-center py-4 bg-second-yellow text-center">
-            <div className="absolute left-7 top-8 w-7"><a><Image src={voltar} alt="botão Voltar" /></a></div>
+        <div className="flex flex-col w-[40%] h-screen justify-evenly items-center py-4 bg-second-yellow text-center">
+            <div className="absolute left-7 top-8 w-7"><button><Image src={voltar} alt="botão Voltar" /></button></div>
 
             <Link href="/">
                 <Image className="w-[150px]" src={logo} alt="Logo" />
@@ -67,7 +67,7 @@ export default function CadastroRestaurante() {
 
                         <li className="flex flex-col ">
                             <label>Digite o Nome Fantasia *</label>
-                            <input className="flex h-10  bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs" id="nomeFantasia" type="text" placeholder="Digite aqui o Nome Fantansia" />
+                            <input className="flex h-10  bg-slate-100 border-s-4 rounded-md outline-none p-46 focus:border-second-green text-xs" id="nomeFantasia" type="text" placeholder="Digite aqui o Nome Fantansia" />
                         </li>
 
                         <div>
