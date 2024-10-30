@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
+import Instrucoes from "@/components/Instrucao";
 
 
 // FALTA LIGAR COM O BACK 
+// verificar se os dados de login, batem com os dados do banco e estão corretos, caso não estejam aparecer mensagem de dados incorretos
 
 
 export default function Login() {
@@ -55,11 +57,11 @@ export default function Login() {
 
             <ul className="flex flex-col text-[14px] w-[80%] text-start gap-2  list-disc leading-4">
                 <p className="pb-2">Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
-                <li> Digite obrigatoriamente o Email e Senha</li>
-                <li> Estrutura email: exemplo@exemplo.com</li>
-                <li> Estrutura senhar: Letras maiúsculas, minúsculas e números. </li>
-                <li> Ao esquecer a senha, clique em "recuperar senha" </li>
-                <li> Caso não tenha cadastro, clique logo abaixo em "fazer cadastro". </li>
+                <Instrucoes intrucao="Digite obrigatoriamente o Email e Senha." />
+                <Instrucoes intrucao="Estrutura email: exemplo@exemplo.com." />
+                <Instrucoes intrucao="Estrutura senhar: Letras maiúsculas, minúsculas e números." />
+                <Instrucoes intrucao="Ao esquecer a senha, clique em 'recuperar senha'" />
+                <Instrucoes intrucao="Caso não tenha cadastro, clique logo abaixo em 'fazer cadastro'." />
             </ul>
 
             <div className="text-[14px]">
@@ -74,26 +76,31 @@ export default function Login() {
                 <div> <span className="font-bold">Ao lado</span>  você encontra instruções em caso de dúvida.</div>
             </div>
 
-            <form onSubmit={handleSubmit} className="flex flex-col items-center gap-5">
+            <form onSubmit={handleSubmit} action='#' method='post' className="flex flex-col items-center gap-5">
                 <div className="flex flex-col w-[450px]  gap-1">
                     {/* se atentar a fazer ainda : Colocar a lógica do asteristico vermelho de obrigatoriedade */}
-                    <label className="font-semibold"> Digite seu endereço de e-mail </label>
+                    <label for="email" className="font-semibold"> Digite seu endereço de e-mail </label>
 
                     {/* pegar o valor sempre atualizado, pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                     <input onChange={(e) => setEmail(e.target.value)}
                         className="flex h-10  bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                         type="email"
+                        id="email"
+                        autoFocus
+                        required
                         placeholder="Digite aqui seu e-mail" />
                 </div>
 
                 <div className="flex flex-col w-[450px] gap-1">
                     {/* se atentar a fazer ainda : Colocar a lógica do asteristico vermelho de obrigatoriedade */}
-                    <label className="font-semibold"> Digite sua senha </label>
+                    <label for="password" className="font-semibold"> Digite sua senha </label>
 
                     {/* o evento pega o valor sempre atualizado. Pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                     <input onChange={(e) => setPassword(e.target.value)}
                         className="flex h-10  bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                         type="password"
+                        id="password"
+                        required
                         placeholder="Digite aqui sua senha" />
                 </div>
 
