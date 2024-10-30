@@ -8,11 +8,11 @@ import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
 
 export default function CadastroVoluntario() {
-    const [razaoSocial, setRazaoSocial] = useState('')
-    const [nomeFantasia, setNomeFantasia] = useState('')
+    const [nomeCompleto, setNomeCompleto] = useState('')
+    const [cpf, setCpf] = useState('')
     const [imagemUser, setImagemUser] = useState('')
-    const [cnpj, setCnpj] = useState('')
     const [telefone, setTelefone] = useState('')
+    const [telefone2, setTelefone2] = useState('')
     const [nomeRua, setNomeRua] = useState('')
     const [numeroRua, setNumeroRua] = useState('')
     const [complemento, setComplemento] = useState('')
@@ -23,6 +23,8 @@ export default function CadastroVoluntario() {
     const [confirmaEmail, setConfirmaEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmaPassword, setConfirmaPassword] = useState('')
+    const [nomeGrupo, setNomeGrupo] = useState('')
+    const [telefoneGrupo, setConfirmaTelefoneRepresentante] = useState('')
 
     const handleChange = (event) => {
     }
@@ -323,27 +325,27 @@ export default function CadastroVoluntario() {
                         <li className="flex flex-col ">
                             <label 
                             className='text-sm'
-                            htmlFor="confirmacaoPassword">
-                               Confirmação senha <span className=' text-red-600'>*</span>
+                            htmlFor="nomeGrupo">
+                               Nome do Grupo/ONG que você faz parte <span className=' text-red-600'>*</span>
                             </label>
                             <input
-                                onChange={(e) => setConfirmaPassword(e.target.value)}
-                                id="confirmacaoPassword"
-                                type="password"
+                                onChange={(e) => setNomeGrupo(e.target.value)}
+                                id="nomeGrupo"
+                                type="text"
                                 required
                                 className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
-                                placeholder="Confirme aqui sua senha"/>
+                                placeholder="Confirme aqui o nome"/>
                         </li>
                         <li className="flex flex-col ">
                             <label 
                             className='text-sm'
-                            htmlFor="confirmacaoPassword">
-                               Confirmação senha <span className=' text-red-600'>*</span>
+                            htmlFor="telefoneRepresentante">
+                               Telefone do responsável pelo Grupo/ONG <span className=' text-red-600'>*</span>
                             </label>
                             <input
-                                onChange={(e) => setConfirmaPassword(e.target.value)}
-                                id="confirmacaoPassword"
-                                type="password"
+                                onChange={(e) => setConfirmaTelefoneRepresentante(e.target.value)}
+                                id="telefoneRepresentante"
+                                type="tel"
                                 required
                                 className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
                                 placeholder="Confirme aqui sua senha"/>
