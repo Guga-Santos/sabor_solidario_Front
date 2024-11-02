@@ -47,9 +47,11 @@ export default function CadastroRestaurante() {
     const [confirma, setConfirma] = useState(0)
 
     const form = document.getElementById('formulario')
-    const camposRequired = document.querySelectorAll('.required')
     const spans = document.querySelectorAll('.span-required')
+    const camposObrigatorios = document.querySelectorAll('.required')
+
     
+    // Função para conferir o checked dos checkbox's
     function checkbox(e) {
         if (e.target.checked) {
             setConfirma(confirma +1) 
@@ -57,33 +59,34 @@ export default function CadastroRestaurante() {
             setConfirma(confirma -1)
         }
     } 
-    // criando uma funçao para verificar se no campo/input(inputs que tem a classe required) foi digitado mais que 3 palavras.  
-    // irei aplicar através do oninput="nameValidate" no input da razão social, nome fantasia
-    // ou seja, qunado o user estiver escrevendo algo, quero que a função namevalidate seja aplicado. 
+
     useEffect(() => {
         // chamado do arquivo restaurante.json - mock
-        console.log(dados.razaoSocial)
-        console.log(dados.num)
-        
+
         if(email.length > 3 && confirma == 3) {
             setData(true)
+            console.log("concluido")
         }
         if(email.length < 3) setData(false)
     }, [email, confirma])
 
     // useEffect(() => {}, [])
-    const handleChange = () => {
+   
 
+    // Validação de estrutura email e senha. E se ambos são iguais. 
+    const handleChange = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-        console.log("Dados de cadastro:", email, password);
+        console.log("Dados de cadastro:", email, password)
+
+
         if (email && !emailRegex.test(email)) {
             alert("Por favor, insira um email válido.")
         }
 
         if (!(email == confirmaEmail)) {
-            alert("Os emails devem coincidir.");
+            alert("Os emails devem coincidir.")
         }
 
         if (!passwordRegex.test(password)) {
@@ -91,11 +94,9 @@ export default function CadastroRestaurante() {
         }
 
         if (confirmaPassword && !(password == confirmaPassword)) {
-            alert("As senhas devem coincidir.");
+            alert("As senhas devem coincidir.")
         }
-
     }
-
 
 
     return <div className="flex w-screen h-screen">
@@ -154,7 +155,7 @@ export default function CadastroRestaurante() {
 
                 <div>
                     <button
-                    className={` ${data ? "bg-second-green":"bg-black"}  text-white hover:bg-second-green-hover hover:text-text-bro w-[100%] h-[55px] rounded-xl font-bold mt-2`}
+                    className={` ${data ? "bg-second-green":"bg-slate-400"} text-white w-[100%] h-[55px] rounded-xl font-bold mt-2`}
                     type="button" 
                     value="cadastrar"
                     disabled={data}

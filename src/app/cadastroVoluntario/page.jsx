@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from "react";
 import Link from 'next/link'
 import Image from "next/image";
 import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
+
 
 export default function CadastroVoluntario() {
     const [nomeCompleto, setNomeCompleto] = useState('')
@@ -26,8 +27,60 @@ export default function CadastroVoluntario() {
     const [nomeGrupo, setNomeGrupo] = useState('')
     const [telefoneGrupo, setConfirmaTelefoneRepresentante] = useState('')
 
-    const handleChange = (event) => {
-    }
+    const [data, setData] = useState(false)
+    const [confirma, setConfirma] = useState(0)
+
+    const form = document.getElementById('formulario')
+    const spans = document.querySelectorAll('.span-required')
+    const camposObrigatorios = document.querySelectorAll('.required')
+
+        // Função para conferir o checked dos checkbox's
+        function checkbox(e) {
+            if (e.target.checked) {
+                setConfirma(confirma +1) 
+            } else {
+                setConfirma(confirma -1)
+            }
+        } 
+    
+        useEffect(() => {
+            // chamado do arquivo restaurante.json - mock
+    
+            if(email.length > 3 && confirma == 3) {
+                setData(true)
+                console.log("concluido")
+            }
+            if(email.length < 3) setData(false)
+        }, [email, confirma])
+    
+        // useEffect(() => {}, [])
+       
+    
+        // Validação de estrutura email e senha. E se ambos são iguais. 
+        const handleChange = () => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    
+            console.log("Dados de cadastro:", email, password)
+    
+    
+            if (email && !emailRegex.test(email)) {
+                alert("Por favor, insira um email válido.")
+            }
+    
+            if (!(email == confirmaEmail)) {
+                alert("Os emails devem coincidir.")
+            }
+    
+            if (!passwordRegex.test(password)) {
+                alert("A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.");
+            }
+    
+            if (confirmaPassword && !(password == confirmaPassword)) {
+                alert("As senhas devem coincidir.")
+            }
+        }
+
 
     return <div className="flex w-screen h-screen">
         {/* Tela apresentação dados */}
@@ -187,7 +240,7 @@ export default function CadastroVoluntario() {
                                 id="nomeRua"
                                 type="text"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui o nome da sua rua"/>
                         </li>
                         <li className="flex flex-col ">
@@ -201,7 +254,7 @@ export default function CadastroVoluntario() {
                                 id="numeroRua"
                                 type="number"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui o número da sua rua"/>
                         </li>
                         <li className="flex flex-col ">
@@ -214,7 +267,7 @@ export default function CadastroVoluntario() {
                                 onChange={(e) => setComplemento(e.target.value)}
                                 id="complemento"
                                 type="text"
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui o complemento"/>
                         </li>
                         <li className="flex flex-col ">
@@ -228,7 +281,7 @@ export default function CadastroVoluntario() {
                                 id="bairro"
                                 type="text"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui seu bairro"/>
                         </li>
                         <li className="flex flex-col ">
@@ -242,7 +295,7 @@ export default function CadastroVoluntario() {
                                 id="cidade"
                                 type="text"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui seu bairro"/>
                         </li>
                         <li className="flex flex-col ">
@@ -256,7 +309,7 @@ export default function CadastroVoluntario() {
                                 id="cep"
                                 type="text"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui seu bairro"/>
                         </li>
                     </ul>
@@ -277,7 +330,7 @@ export default function CadastroVoluntario() {
                                 id="email"
                                 type="email"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui seu endereço de email"/>
                         </li>
                         <li className="flex flex-col ">
@@ -291,7 +344,7 @@ export default function CadastroVoluntario() {
                                 id="confirmacaoEmail"
                                 type="email"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Confirme aqui seu endereço de email"/>
                         </li>
                         <li className="flex flex-col ">
@@ -305,7 +358,7 @@ export default function CadastroVoluntario() {
                                 id="password"
                                 type="password"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Digite aqui sua senha"/>
                         </li>
                         <li className="flex flex-col ">
@@ -319,7 +372,7 @@ export default function CadastroVoluntario() {
                                 id="confirmacaoPassword"
                                 type="password"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Confirme aqui sua senha"/>
                         </li>
                         <li className="flex flex-col ">
@@ -333,7 +386,7 @@ export default function CadastroVoluntario() {
                                 id="nomeGrupo"
                                 type="text"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Confirme aqui o nome"/>
                         </li>
                         <li className="flex flex-col ">
@@ -347,7 +400,7 @@ export default function CadastroVoluntario() {
                                 id="telefoneRepresentante"
                                 type="tel"
                                 required
-                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                className="inputs flex h-10 mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-pink text-xs"
                                 placeholder="Confirme aqui sua senha"/>
                         </li>
                         
