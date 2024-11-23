@@ -132,13 +132,14 @@ export default function PerfilRestaurante() {
                             </button>
                         </form>
                     </div>
-
+                </div>
+                
+                <div>
                     <div className="bg-white rounded-2xl p-10">
                         <h3 className="text-3xl font-bold leading-7">Campanhas ativas</h3>
 
-                        <div className=" grid grid-cols-2 grid-rows-2 mt-5"> 
+                        <div className=" grid grid-cols-2 mt-5"> 
                             <div className="flex border border-solid border-gray-300 rounded-xl p-5">
-                                <Image className="w-24" src={imagensUser} />
                                 <div>
                                     <div className="flex flex-col">
                                         <span>Nome da campanha</span>
@@ -149,18 +150,12 @@ export default function PerfilRestaurante() {
                                         <button className="p-2 w-24 border-2 border-solid border-red-500 rounded-lg text-red-500 font-semibold">Cancelar</button>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <div>
+
                     <div>
-                        Campanhas ativas 
-                    </div>
-                    <div>
-                        Historico
+                        Agendamentos
                     </div>
                 </div> 
             </div>
