@@ -33,11 +33,8 @@ export default function Home() {
         </div>
 
         <div className="flex gap-4 text-[14px]">
-          <Link href="/cadastro">
-            <button className="border-solid border-2 border-text-bro px-6 py-1 rounded-md font-semibold hover:scale-105 transition">Cadastre-se</button>
-          </Link>
           <Link href="/login">
-            <button className="bg-second-pink px-14 py-1 rounded-md font-semibold text-second-yellow hover:scale-105 hover:bg-second-pink-hover transition">Entrar</button>
+            <button className="bg-second-pink px-14 py-[6] rounded-md font-semibold text-second-yellow hover:scale-105 hover:bg-second-pink-hover transition">Entrar</button>
           </Link>
         </div>
       </nav>
@@ -54,9 +51,9 @@ export default function Home() {
 
           {/* alterar efeito do hover */}
           <Link href="/cadastro">
-            <div className="flex w-[220] h-[50] items-center justify-center gap-4 border-solid border-2 border-second-pink rounded-[50px] font-bold hover:scale-105 hover:bg-second-pink hover:border-second-pink-hover hover:text-white transition mt-4">
+            <div className="flex w-[220] h-[50] items-center justify-center gap-4 border-solid border-2 border-second-pink rounded-[10px] font-bold hover:scale-105 hover:bg-second-pink hover:text-white transition mt-4">
               <button> Cadastre-se </button>
-              <Image src={seta} alt="imagem voltar" />
+              <Image className="hover:object-none" src={seta} alt="imagem ir" />
             </div>
           </Link>
         </div>
@@ -83,14 +80,14 @@ export default function Home() {
           <div className="flex flex-col gap-3">
             <div className=" flex items-center gap-2 ">
               <Link href="/cadastroVoluntario">
-                <Image width={60} src={imgvolunt} />
+                <Image width={60} src={imgvolunt} alt="representação de doação" />
               </Link>
               <p className="w-6/12 font-semibold leading-5 text-center"> Para agendar a retirada das doações </p>
             </div>
 
             <div className=" flex items-center gap-2 ">
               <Link href="/cadastroRestaurante">
-                <Image width={60} src={imgrestaur} />
+                <Image width={60} src={imgrestaur} alt="representação restaurante" />
               </Link>
               <p className="w-6/12 font-semibold leading-5 text-center"> Para doar alimentos e evitar desperdícios. </p>
             </div>
@@ -99,7 +96,7 @@ export default function Home() {
       </div>
 
       {/* Section Sobre nós / contato */}
-      <div className="w-[100vw] h-[70vh] flex items-center gap-9">
+      <div className="w-[100vw] h-[60vh] flex items-center gap-9 sobre_nos">
         <div className="flex flex-col flex-1 text-end items-end gap-4 ">
           <div>
             <p className="w-72 items-end justify-end text-xl text-second-pink leading-6 font-bold">Nos ajude a mudar o mundo e torna-lo ainda melhor!</p>
@@ -111,17 +108,16 @@ export default function Home() {
             <button className=" drop-shadow-md w-52 bg-second-green px-7 py-3 rounded-md font-bold text-text-bro hover:scale-105 hover:bg-second-green-hover transition">Entre em contato</button>
           </Link>
           <div className="flex gap-3 items-center justify-center">
-            <div className="flex p-[-200] cursor-pointer ">
-              <Image className="drop-shadow-sm hover:drop-shadow-lg absolute left-[30%]" width={55} src={User2} />
-              <Image className="drop-shadow-sm hover:drop-shadow-lg absolute left-[32.5%]" width={55} src={User1} />
-              <Image className="drop-shadow-sm hover:drop-shadow-lg" width={55} src={User3} />
+            <div className="flex cursor-pointer">
+              <Image className="drop-shadow-sm hover:drop-shadow-lg" width={55} src={User2} alt="imagem usuario"/>
+              <Image className="drop-shadow-sm hover:drop-shadow-lg" width={55} src={User3} alt="imagem usuario" />
             </div>
 
             <div>
               <span className="font-semibold">Nossos visitantes</span>
 
               <div className="flex text-xs gap-1 justify-end items-center">
-                <Image width={14} src={star} />
+                <Image width={14} src={star} alt="estrela"/>
                 <span>4,8</span>
                 <span className="text-second-gray"> (12.5k visitas) </span>
               </div>
@@ -146,15 +142,14 @@ export default function Home() {
 
       </div>
 
-
       {/* Footer */}
       <div className=" flex gap-5 items-center justify-evenly w-[100vw] h-[45vh] bg-second-green">
           <div className=" flex flex-col gap-3">
-            <Image width={180} src={logo} />
+            <Image width={180} src={logo} alt="logo marca" />
             <div className="flex gap-1 items-center justify-evenly"> 
-              <Image className=" opacity-95 hover:drop-shadow-lg hover:scale-105 cursor-pointer" width={30} src={face} />
-              <Image className=" opacity-95 hover:drop-shadow-lg hover:scale-105 cursor-pointer" width={30} src={insta} />
-              <Image className=" opacity-95 hover:drop-shadow-lg hover:scale-105 cursor-pointer" width={30} src={whats} />
+              <Image className=" opacity-95 hover:drop-shadow-lg hover:scale-105 cursor-pointer" width={30} src={face} alt="logo marca facebook"/>
+              <Image className=" opacity-95 hover:drop-shadow-lg hover:scale-105 cursor-pointer" width={30} src={insta} alt="logo marca instagram" />
+              <Image className=" opacity-95 hover:drop-shadow-lg hover:scale-105 cursor-pointer" width={30} src={whats} alt="logo marca whatsapp" />
             </div>
           </div>
 

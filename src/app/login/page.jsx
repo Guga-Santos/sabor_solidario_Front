@@ -79,7 +79,7 @@ export default function Login() {
             <form onSubmit={handleSubmit} action='#' method='post' className="flex flex-col items-center gap-5">
                 <div className="flex flex-col w-[450px]  gap-1">
                     {/* se atentar a fazer ainda : Colocar a lógica do asteristico vermelho de obrigatoriedade */}
-                    <label for="email" className="font-semibold"> Digite seu endereço de e-mail </label>
+                    <label htmlFor="email" className="font-semibold"> Digite seu endereço de e-mail </label>
 
                     {/* pegar o valor sempre atualizado, pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                     <input onChange={(e) => setEmail(e.target.value)}
@@ -93,7 +93,7 @@ export default function Login() {
 
                 <div className="flex flex-col w-[450px] gap-1">
                     {/* se atentar a fazer ainda : Colocar a lógica do asteristico vermelho de obrigatoriedade */}
-                    <label for="password" className="font-semibold"> Digite sua senha </label>
+                    <label htmlFor="password" className="font-semibold"> Digite sua senha </label>
 
                     {/* o evento pega o valor sempre atualizado. Pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                     <input onChange={(e) => setPassword(e.target.value)}
@@ -109,7 +109,9 @@ export default function Login() {
                     <p> Esqueceu sua senha? <a href="/recuperarSenha"><span className="font-bold text-second-green hover:underline">Recuperar senha.</span></a></p>
                 </div>
 
-                <button className="w-[450px] bg-second-pink text-white h-10 rounded-lg transition hover:opacity-85">Entrar</button>
+                <Link href="/perfilRestaurante"> 
+                    <button className="w-[450px] bg-second-pink text-white h-10 rounded-lg transition hover:opacity-85">Entrar</button>
+                </Link>
             </form>
         </div>
     </div>
