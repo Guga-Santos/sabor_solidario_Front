@@ -38,7 +38,7 @@ export default function PerfilRestaurante() {
         </aside>
 
         <main className="flex-1 bg-second-yellow w-screen h-screen p-9">
-            {/* cabeçalho */}
+            {/* apresentação */}
             <div className="flex justify-between px-5">
                 <h1 className="font-bold text-3xl">
                     Olá, <br /> Restaurante!
@@ -49,33 +49,45 @@ export default function PerfilRestaurante() {
                       <h4 className="font-bold text-second-green-hover">Nome da empresa</h4> 
                       <span className="text-sm font-semibold">CNPJ</span> 
                     </div>
-                    <Image src={imagensUser} className="w-14 h-14 rounded-xl border border-solid border-gray-500"/>
+                    <Image src={imagensUser} className="w-14 h-14 rounded-xl border border-solid border-gray-400"/>
                 </div>
             </div>
 
-            {/* cadastrar campanha e agendamento */}
-            <div className="pt-9 h-[80%] grid grid-cols-2 grid-rows-2">
+            <div className="pt-9 h-[80%] grid grid-cols-2 grid-rows-2 gap-4">
+               {/* Cadastrar campanha */}
                 <div className=" flex flex-col gap-5">
                     <div className="bg-white rounded-2xl p-10">
                         <div className="flex justify-between"> 
                             <h3 className="text-3xl font-bold leading-7	">Cadastrar <br /> Campanha</h3>
-                            <span className="flex text-end text-xs w-[45%]">Necessário preencher todos os campos para finalização do cadastro.</span>
+                            <span className="flex text-end text-xs w-[45%] text-gray-400">Necessário preencher todos os campos para finalização do cadastro.</span>
                         </div> 
                         <form className="mt-5">
                             <ul>
                                 <li className="mb-4">
                                     <label 
                                     className='text-sm'
-                                    htmlFor="resumo">
+                                    htmlFor="name">
+                                        Nome da campanha <span className='text-red-600'>*</span>
+                                    </label>
+                                    <input 
+                                    type="text" 
+                                    required 
+                                    className="inputs flex mt-1 w-[95%] bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                    placeholder="Escreva aqui nome do seu produto"/>
+                                </li>
+                                <li className="mb-4">
+                                    <label 
+                                    className='text-sm'
+                                    htmlFor="resum">
                                         Resumo <span className='text-red-600'>*</span>
                                     </label>
                                     <input 
                                     type="text" 
                                     required 
-                                    className="inputs flex h-10 mt-1 w-[95%] h-16 bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
+                                    className="inputs flex mt-1 w-[95%] bg-slate-100 border-s-4 rounded-md outline-none p-4 focus:border-second-green text-xs"
                                     placeholder="Escreva aqui sobre seu produto"/>
                                 </li>
-                                <div className="grid grid-cols-2 gap-4 ">
+                                <div className="grid grid-cols-2 gap-4 items-center">
                                     <li>
                                         <label 
                                         className='text-sm'
@@ -125,7 +137,6 @@ export default function PerfilRestaurante() {
                                         placeholder="Escreva aqui sobre seu produto"/>
                                     </li>
                                 </div>
-                               
                             </ul>
                             <button type="button" className="w-[100%] text-white mt-8 font-bold bg-second-green hover:bg-second-green-hover p-3 rounded-lg "> 
                                 Cadastrar 
@@ -133,28 +144,28 @@ export default function PerfilRestaurante() {
                         </form>
                     </div>
                 </div>
-                
-                <div>
+
+              {/* Campanhas ativas e Agendamentos   */}
+                <div className="flex flex-col gap-5">
+                    {/* Campanhas ativas */}
                     <div className="bg-white rounded-2xl p-10">
                         <h3 className="text-3xl font-bold leading-7">Campanhas ativas</h3>
 
+                        {/* Precisa ficar display none e quando for acrescentado alguma campanha, ficar visivel e funcional */}
                         <div className=" grid grid-cols-2 mt-5"> 
-                            <div className="flex border border-solid border-gray-300 rounded-xl p-5">
-                                <div>
-                                    <div className="flex flex-col">
+                            <div className="flex border border-solid border-gray-300 rounded-xl p-5 justify-center gap-3">
+                                    <div className="flex flex-col text-sm">
                                         <span>Nome da campanha</span>
-                                        <span>Data: dd/mm/aaaa</span>
+                                        <span>dd/mm/aaaa</span>
                                     </div>
-                                    <div className="flex gap-5">
-                                        <button className="p-2 w-24 bg-second-green rounded-lg font-semibold">Editar</button>
-                                        <button className="p-2 w-24 border-2 border-solid border-red-500 rounded-lg text-red-500 font-semibold">Cancelar</button>
+                                    <div className="flex">
+                                        <button className="p-2 w-[100%] text-sm border-2 border-solid border-red-500 rounded-lg text-red-500 font-semibold hover:bg-red-500 hover:text-white">Cancelar</button>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div>
+                    <div className="bg-white rounded-2xl p-10">
                         Agendamentos
                     </div>
                 </div> 
