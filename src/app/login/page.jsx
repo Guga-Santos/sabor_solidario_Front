@@ -43,19 +43,21 @@ export default function Login() {
     }
 
 
-    return <div className="flex w-[100vw] h-[100vh]">
-        <div className="flex flex-col w-[40%] justify-evenly items-center bg-second-yellow text-center">
+    return ( 
+    <div className="flex flex-col lg:flex-row w-screen h-screen">
+        {/* Lado esquerdo - bem vindos */}
+        <div className="py-20 lg:py-10 flex text-center gap-20 flex-col lg:w-[40%] h-[100%] justify-evenly items-center bg-second-yellow">
             <div className="absolute left-7 top-8 w-7">
                     <button><Image src={voltar} alt="seta voltar" /></button>
             </div>
 
             <Link href="/">
-                <Image className="w-[150px]" src={logo} alt="Logo" />
+                <Image className="w-[120px]" src={logo} alt="Logo" />
             </Link>
 
-            <div className="font-extrabold text-[65px] leading-[1]"> Bem-vindo de volta!</div>
+            <div className="font-extrabold lg:text-[65px] text-[50px] leading-[1] px-5"> Bem-vindo de volta!</div>
 
-            <ul className="flex flex-col text-[14px] w-[80%] text-start gap-2  list-disc leading-4">
+            <ul className="flex flex-col leading-3 text-[12px] lg:text-[14px] w-[80%] text-center lg:text-start gap-2  list-disc leading-4">
                 <p className="pb-2">Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
                 <Instrucoes intrucao="Digite obrigatoriamente o Email e Senha." />
                 <Instrucoes intrucao="Estrutura email: exemplo@exemplo.com." />
@@ -64,22 +66,23 @@ export default function Login() {
                 <Instrucoes intrucao="Caso não tenha cadastro, clique logo abaixo em 'fazer cadastro'." />
             </ul>
 
-            <div className="text-[14px]">
+            <div className="text-[12px] lg:text-[14px]">
                 <p>Se você <span className="font-bold">ainda</span> não tem uma conta,</p>
                 <p className="text-second-green font-bold hover:underline"><Link href="/cadastro">Fazer cadastro.</Link></p>
             </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center w-[100vw] h-[100vh] gap-5">
+        {/* Lado direito - login */}
+        <div className="flex py-24 lg:py-10 flex-col justify-center items-center w-screen h-screen lg:p-0 p-10 gap-5">
             <div className="flex flex-col gap-3 items-center mb-10">
-                <div className="font-extrabold text-second-pink text-5xl">Faça o seu login agora</div>
-                <div> <span className="font-bold">Ao lado</span>  você encontra instruções em caso de dúvida.</div>
+                <div className="font-extrabold text-second-pink text-center text-4xl lg:text-5xl">Faça o seu login agora</div>
+                <div className="text-[14px] lg:text-[16px]"> <span className="font-bold">Ao lado</span>  você encontra instruções em caso de dúvida.</div>
             </div>
 
             <form onSubmit={handleSubmit} action='#' method='post' className="flex flex-col items-center gap-5">
-                <div className="flex flex-col w-[450px]  gap-1">
+                <div className="flex flex-col w-full px-20 lg:px-0 lg:w-[450px] gap-1">
                     {/* se atentar a fazer ainda : Colocar a lógica do asteristico vermelho de obrigatoriedade */}
-                    <label htmlFor="email" className="font-semibold"> Digite seu endereço de e-mail </label>
+                    <label htmlFor="email" className="font-semibold text-[12px] lg:text-[16px]"> Digite seu endereço de e-mail </label>
 
                     {/* pegar o valor sempre atualizado, pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                     <input onChange={(e) => setEmail(e.target.value)}
@@ -91,9 +94,9 @@ export default function Login() {
                         placeholder="Digite aqui seu e-mail" />
                 </div>
 
-                <div className="flex flex-col w-[450px] gap-1">
+                <div className=" px-20 lg:px-0 flex flex-col w-[450px] gap-1">
                     {/* se atentar a fazer ainda : Colocar a lógica do asteristico vermelho de obrigatoriedade */}
-                    <label htmlFor="password" className="font-semibold"> Digite sua senha </label>
+                    <label htmlFor="password" className=" text-[12px] lg:text-[16px] font-semibold"> Digite sua senha </label>
 
                     {/* o evento pega o valor sempre atualizado. Pegando os dados digitados do user através da função onChange(ato do usuario digitar)*/}
                     <input onChange={(e) => setPassword(e.target.value)}
@@ -104,15 +107,16 @@ export default function Login() {
                         placeholder="Digite aqui sua senha" />
                 </div>
 
-                <div className="flex justify-between text-xs w-[450px] mb-10">
+                <div className="flex flex-col items-center lg:flex-row justify-between text-xs w-full mb-10">
                     <label className="flex gap-1"><input type="checkbox" /> Lembrar de mim</label>
                     <p> Esqueceu sua senha? <a href="/recuperarSenha"><span className="font-bold text-second-green hover:underline">Recuperar senha.</span></a></p>
                 </div>
 
                 <Link href="/perfilRestaurante"> 
-                    <button className="w-[450px] bg-second-pink text-white h-10 rounded-lg transition hover:opacity-85">Entrar</button>
+                    <button className=" px-32 lg:px-[200px] bg-second-pink text-white h-10 rounded-lg transition hover:bg-second-pink-hover">Entrar</button>
                 </Link>
             </form>
         </div>
     </div>
+    )
 }

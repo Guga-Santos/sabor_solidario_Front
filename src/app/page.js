@@ -19,21 +19,21 @@ export default function Home() {
 
   const testimonials = [
     {
-      image: User2, // Substitua pelo seu asset
+      image: User2,
       name: "Joana Silva",
       role: "Voluntária",
       message:
         "Participar dessa iniciativa foi transformador. Estou feliz em contribuir para um mundo melhor.",
     },
     {
-      image: User3, // Substitua pelo seu asset
-      name: "Carlos Souza",
+      image: User3, 
+      name: "Manubs fest",
       role: "Restaurante Parceiro",
       message:
         "Reduzimos o desperdício e ajudamos quem mais precisa. Sabor Solidário é incrível!",
     },
     {
-      image: User2, // Substitua pelo seu asset
+      image: User2, 
       name: "Mariana Oliveira",
       role: "Doadora",
       message:
@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <div className="container h-screen w-screen min-w-screen">
       {/* Header */}
-      <nav className="flex pt-4 justify-around items-center wx-auto h-[12%] sticky top-0 left-0 bg-white">
+      <nav className="flex lg:pt-2 justify-around items-center wx-auto w-screen h-[12%] sticky top-0 left-0 bg-white">
         <div>
           <Link href='/'>
             <Image className="w-[90px] object-cover" src={logo} alt="Logo" />
@@ -84,12 +84,12 @@ export default function Home() {
         <div className="absolute top-[70px] left-0 w-full bg-white shadow-lg z-40">
           <ul className="flex flex-col items-center gap-4 text-[14px] font-semibold py-4">
             <li>
-              <Link href="/" onClick={() => setMenuOpen(false)}>
+              <Link className='hover:text-second-pink-hover transition' href="/" onClick={() => setMenuOpen(false)}>
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/" onClick={() => setMenuOpen(false)}>
+              <Link className='hover:text-second-pink-hover transition' href="/" onClick={() => setMenuOpen(false)}>
                 Sobre nós
               </Link>
             </li>
@@ -106,7 +106,7 @@ export default function Home() {
 
       {/* HeroSection leading-none  */}
       <div className="flex flex-col pt-10 text-center px-14 lg:pb-6 lg:flex-row justify-center items-center w-screen h-auto lg:text-start">
-        <div className="flex flex-col flex-1 md:px-5">
+        <div className="flex flex-col flex-1 md:px-9">
           <h1 className="text-[50px] leading-none md:text-[55px] lg:text-[65px] lg:w-[90%] w-[100%] lg:leading-none font-bold tracking-[-.03em]">
             <span className="text-second-pink">Juntos</span>, podemos construir um futuro melhor<span className="text-second-pink">!</span>
           </h1>
@@ -257,7 +257,7 @@ export default function Home() {
       <div className="flex w-screen flex-col md:flex-row gap-5 items-center justify-center md:justify-evenly h-auto md:h-[45vh] bg-second-green p-5 md:w-screen">
         {/* Coluna 1: Logo e redes sociais */}
         <div className="flex flex-col gap-3 items-center">
-          <Image width={140} src={logo} alt="logo marca" />
+          <Image width={100} src={logo} alt="logo marca" />
           <div className="flex gap-3">
             <Link href="/" className="hover:scale-110 transition-transform duration-200 hover:text-second-pink">
               <Facebook />
