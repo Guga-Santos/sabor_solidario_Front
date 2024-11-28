@@ -82,7 +82,8 @@ export default function CadastroVoluntario() {
         }
 
 
-    return <div className="flex w-screen h-screen">
+    return (
+    <div className="flex flex-col md:flex-row w-full h-screen">
         {/* Tela apresentação dados */}
         <div className="flex flex-col w-[40%] h-screen justify-evenly items-center py-4 bg-second-yellow text-center">
             <div className="absolute left-7 top-8 w-7"><button><Image src={voltar} alt="botão Voltar" /></button></div>
@@ -91,9 +92,9 @@ export default function CadastroVoluntario() {
                 <Image className="w-[150px]" src={logo} alt="Logo" />
             </Link>
 
-            <div className="font-extrabold text-[50px] px-10  leading-[1]"> Preencha os dados e cadastre-se!</div>
+            <div className="font-extrabold text-[40px] px-10  leading-[1]"> Preencha os dados e cadastre-se!</div>
 
-            <ul className="flex flex-col text-[14px] w-[80%] text-start gap-2  list-disc leading-4">
+            <ul className="flex flex-col text-[12px] w-[80%] text-start gap-2  list-disc leading-4">
                 <p>Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
                 <li> Preencha todos os dados conforme solicitado</li>
                 <li> Preencha obrigatoriamente itens com o <span className="text-red-600 font-extrabold">*</span></li>
@@ -101,8 +102,8 @@ export default function CadastroVoluntario() {
 
             {/* >>>>>>> Section - aceitação e botão */}
             <div className=" w-[60%] flex flex-col gap-2">
-                <div className="text-[14px]">
-                    <ul className="flex flex-col gap-1 items-start pt-2 text-[13px] ">
+                <div className="text-[12px]">
+                    <ul className="flex flex-col gap-1 items-start pt-2 text-[12px] ">
                         <li>
                             <label className='flex items-center justify-center gap-1'>
                                 <input 
@@ -408,5 +409,6 @@ export default function CadastroVoluntario() {
                 </fieldset>
             </form>
         </div >
-    </div >
+    </div>
+    )
 }

@@ -46,7 +46,7 @@ export default function Login() {
     return ( 
     <div className="flex flex-col lg:flex-row w-screen h-screen">
         {/* Lado esquerdo - bem vindos */}
-        <div className="py-20 lg:py-10 flex text-center gap-20 flex-col lg:w-[40%] h-[100%] justify-evenly items-center bg-second-yellow">
+        <div className="flex py-4 text-center gap-20 flex-col lg:w-[40%] h-[100%] justify-evenly items-center bg-second-yellow">
             <div className="absolute left-7 top-8 w-7">
                     <button><Image src={voltar} alt="seta voltar" /></button>
             </div>
@@ -55,9 +55,8 @@ export default function Login() {
                 <Image className="w-[120px]" src={logo} alt="Logo" />
             </Link>
 
-            <div className="font-extrabold lg:text-[65px] text-[50px] leading-[1] px-5"> Bem-vindo de volta!</div>
-
-            <ul className="flex flex-col leading-3 text-[12px] lg:text-[14px] w-[80%] text-center lg:text-start gap-2  list-disc leading-4">
+            <div className="font-extrabold lg:text-[60px] text-[50px] leading-[1] px-5"> Bem-vindo de volta!</div>
+            <ul className="flex flex-col text-[10px] lg:text-[14px] w-[80%] text-center lg:text-start gap-2  list-disc leading-3">
                 <p className="pb-2">Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
                 <Instrucoes intrucao="Digite obrigatoriamente o Email e Senha." />
                 <Instrucoes intrucao="Estrutura email: exemplo@exemplo.com." />

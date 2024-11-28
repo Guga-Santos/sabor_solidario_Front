@@ -10,7 +10,7 @@ import imgrestaur from '../assets/Small Business.svg'
 import User2 from '../assets/Ellipse 6.svg'
 import User3 from '../assets/Ellipse 7.svg'
 import star from '../assets/star.svg'
-import { Menu, CircleChevronRight, Facebook, Instagram, Twitter } from 'lucide-react'
+import { Menu, CircleChevronRight, Facebook, Instagram, Twitter, CircleChevronLeft  } from 'lucide-react'
 
 export default function Home() {
 
@@ -236,18 +236,16 @@ export default function Home() {
             {/* Botões de Navegação */}
             <div className="flex mt-4 gap-2">
               <button
-                className="bg-second-pink text-white w-8 h-8 rounded-full hover:scale-105 transition-transform"
                 onClick={prevSlide}
                 disabled={currentSlide === 0}
               >
-                {"<"}
+              <CircleChevronLeft className="text-second-pink w-7 h-7 hover:scale-110 hover:text-second-pink-hover cursor-pointer transition-transform" />
               </button>
               <button
-                className="bg-second-pink text-white w-8 h-8 rounded-full hover:scale-105 transition-transform"
                 onClick={nextSlide}
                 disabled={currentSlide === testimonials.length - 1}
               >
-                {">"}
+              <CircleChevronRight className="text-second-pink w-7 h-7 hover:scale-110 hover:text-second-pink-hover cursor-pointer transition-transform" />
               </button>
             </div>
           </div>
