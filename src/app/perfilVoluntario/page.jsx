@@ -147,7 +147,7 @@ export default function PerfilVoluntario() {
                                     onClick={handleMostrarTudo}
                                     type="button"
                                     className="flex-1 bg-second-pink text-white font-bold p-3 rounded-lg text-sm lg:text-base hover:bg-second-pink-hover hover:scale-105 transition">
-                                    Localizar
+                                    Mostrar tudo
                                 </button>
                                 <button
                                     onClick={handleLimpar}

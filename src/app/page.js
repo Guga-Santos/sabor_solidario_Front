@@ -65,7 +65,7 @@ export default function Home() {
     <div className="container h-screen w-screen min-w-screen">
       {/* Header */}
       <nav
-        className={`flex lg:pt-2 justify-around items-center w-screen h-[12%] sticky top-0 bg-white z-50 
+        className={`flex lg:pt-2 justify-around items-center w-screen h-[10%] sticky top-0 bg-white z-50 
           ${hasScrolled ? "shadow-md" : ""} transition-shadow duration-300`}
       >
         <div>

@@ -46,13 +46,13 @@ export default function Login() {
     return ( 
     <div className="flex flex-col lg:flex-row w-screen h-screen">
         {/* Lado esquerdo - bem vindos */}
-        <div className="flex py-4 text-center gap-20 flex-col lg:w-[40%] h-[100%] justify-evenly items-center bg-second-yellow">
+        <div className="flex py-4 text-center gap-10 flex-col lg:w-[40%] h-[100%] justify-evenly items-center bg-second-yellow">
             <div className="absolute left-7 top-8 w-7">
                     <button><Image src={voltar} alt="seta voltar" /></button>
             </div>
 
             <Link href="/">
-                <Image className="w-[120px]" src={logo} alt="Logo" />
+                <Image className="w-[100px] lg:w-[120px]" src={logo} alt="Logo" />
             </Link>
 
             <div className="font-extrabold lg:text-[60px] text-[50px] leading-[1] px-5"> Bem-vindo de volta!</div>
@@ -75,7 +75,7 @@ export default function Login() {
         <div className="flex py-24 lg:py-10 flex-col justify-center items-center w-screen h-screen lg:p-0 p-10 gap-5">
             <div className="flex flex-col gap-3 items-center mb-10">
                 <div className="font-extrabold text-second-pink text-center text-4xl lg:text-5xl">Faça o seu login agora</div>
-                <div className="text-[14px] lg:text-[16px]"> <span className="font-bold">Ao lado</span>  você encontra instruções em caso de dúvida.</div>
+                <div className="lg:text-start text-center text-[14px] lg:text-[16px]"> <span className="font-bold">Ao lado</span>  você encontra instruções em caso de dúvida.</div>
             </div>
 
             <form onSubmit={handleSubmit} action='#' method='post' className="flex flex-col items-center gap-5">
