@@ -1,15 +1,15 @@
 {
-  "razaoSocial":"Manubs casa dos Loucos fest",
-  "nomeFantasia": "Loucos Fest",
-  "cnpj": "07435067000112",
-  "telefone": "81997696919",
-  "nomeRua": "Rua das Bolinhas",
-  "numeroRua": "1020",
-  "bairro": "Boa viagem",
-  "cidade": "Recife",
-  "cep": "54310100",
-  "email": "teste@teste.com",
-  "confirmaEmail": "teste@teste.com",
-  "password": "Teste123",
-  "confirmaPassword": "Teste123"
+          "razaoSocial": "Manubs casa dos Loucos fest",
+          "nomeFantasia": "Loucos Fest",
+          "cnpj": "07435067000112",
+          "telefone": "81997696919",
+          "nomeRua": "Rua das Bolinhas",
+          "numeroRua": "1020",
+          "bairro": "Boa viagem",
+          "cidade": "Recife",
+          "cep": "54310100",
+          "email": "teste@teste.com",
+          "confirmaEmail": "teste@teste.com",
+          "password": "Teste123",
+          "confirmaPassword": "Teste123"
 }

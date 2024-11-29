@@ -83,26 +83,26 @@ export default function CadastroVoluntario() {
 
 
     return (
-    <div className="flex flex-col md:flex-row w-full h-screen">
+    <div className="flex flex-col lg:flex-row w-screen h-screen">
         {/* Tela apresentação dados */}
-        <div className="flex flex-col w-[40%] h-screen justify-evenly items-center py-4 bg-second-yellow text-center">
+        <div className="flex gap-8 flex-col w-screen lg:w-[40%] lg:gap-0 h-full justify-evenly items-center py-10 lg:py-4 bg-second-yellow text-center">
             <div className="absolute left-7 top-8 w-7"><button><Image src={voltar} alt="botão Voltar" /></button></div>
 
             <Link href="/">
-                <Image className="w-[150px]" src={logo} alt="Logo" />
+                <Image className="w-[100px] lg:w-[120px]" src={logo} alt="Logo" />
             </Link>
 
-            <div className="font-extrabold text-[40px] px-10  leading-[1]"> Preencha os dados e cadastre-se!</div>
+            <div className="font-extrabold text-[30px] lg:text-[40px] lg:px-10 px-20 leading-[1]"> Preencha os dados e cadastre-se!</div>
 
-            <ul className="flex flex-col text-[12px] w-[80%] text-start gap-2  list-disc leading-4">
+            <ul className="flex flex-col items-center text-center text-xs lg:text-[14px] w-[90%] lg:w-[80%] lg:text-start lg:items-start gap-2 list-disc leading-4">
                 <p>Em caso de dúvidas, siga as <span className="font-bold">instruções</span> abaixo:</p>
                 <li> Preencha todos os dados conforme solicitado</li>
                 <li> Preencha obrigatoriamente itens com o <span className="text-red-600 font-extrabold">*</span></li>
             </ul>
 
             {/* >>>>>>> Section - aceitação e botão */}
-            <div className=" w-[60%] flex flex-col gap-2">
-                <div className="text-[12px]">
+            <div className="w-[80%] lg:w-[60%] flex flex-col gap-2">
+                <div className="text-xs lg:text-[14px]">
                     <ul className="flex flex-col gap-1 items-start pt-2 text-[12px] ">
                         <li>
                             <label className='flex items-center justify-center gap-1'>
@@ -133,7 +133,7 @@ export default function CadastroVoluntario() {
 
                 <div>
                     <button
-                    className="bg-second-pink text-white hover:bg-second-pink-hover hover:text-text-bro w-[100%] h-[55px] rounded-xl font-bold mt-2"
+                    className="bg-second-pink text-white hover:bg-second-pink-hover hover:scale-105 transition-all w-[100%] h-[55px] rounded-xl font-bold mt-2"
                     type="button" 
                     value="cadastrar" 
                     onClick={() => handleChange}>
@@ -144,16 +144,16 @@ export default function CadastroVoluntario() {
         </div>
 
         {/* tela dos inputs */}
-        <div className="flex flex-col justify-center w-[100vw] h-[100vh] gap-4">
+        <div className="flex flex-wrap lg:flex-col justify-center w-screen h-screen gap-4">
             <div className="flex flex-col items-center">
-                <div className="font-extrabold text-second-pink text-[40px] ">Faça o seu cadastro agora</div>
-                <div> <span className="font-bold">Ao lado</span> você encontra instruções em caso de dúvida.</div>
+                <div className="text-center lg:text-start font-extrabold text-[30px] lg:text-[40px] text-second-pink">Faça o seu cadastro agora</div>
+                <div className="lg:text-sm text-xs"> 
+                    <span className="font-bold lg:text-sm text-xs">Ao lado</span> você encontra instruções em caso de dúvida.
+                </div>
             </div>
-
-            {/* name no html do forms, é o nome dos atributos que o back está esperando para receber */}
             {/* Inputs - Dados empresariais */}
             <form action='' method='post' id="formulario" onSubmit={handleChange} >
-                <fieldset className="items-start px-10 ">
+                <fieldset className=" lg:text-base text-sm items-start px-10">
                     <legend className="font-bold text-second-pink pb-1">Dados pessoais</legend>
                     <ul className="grid grid-cols-1 md:grid-cols-3 gap-2 mx-6">
                         <li className="flex flex-col ">
@@ -227,7 +227,7 @@ export default function CadastroVoluntario() {
                 </fieldset>
 
                 {/* Inputs - Endereço */}
-                <fieldset className="items-start px-10 ">
+                <fieldset className=" lg:text-base text-sm items-start px-10">
                     <legend className="font-bold text-second-pink pt-3 pb-1">Endereço</legend>
                     <ul className="grid grid-cols-1 md:grid-cols-3 gap-2 mx-6">
                         <li className="flex flex-col ">
@@ -317,7 +317,7 @@ export default function CadastroVoluntario() {
                 </fieldset>
 
                 {/* Inputs - Acesso */}
-                <fieldset className="items-start px-10 ">
+                <fieldset className=" lg:text-base text-sm items-start px-10">
                     <legend className="font-bold text-second-pink pt-3 pb-1">Dados de acesso</legend>
                     <ul className="grid grid-cols-1 md:grid-cols-3 gap-2 mx-6">
                         <li className="flex flex-col ">

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from "react";
 import Image from "next/image"
 import Link from 'next/link'
@@ -10,12 +10,13 @@ import imgrestaur from '../assets/Small Business.svg'
 import User2 from '../assets/Ellipse 6.svg'
 import User3 from '../assets/Ellipse 7.svg'
 import star from '../assets/star.svg'
-import { Menu, CircleChevronRight, Facebook, Instagram, Twitter, CircleChevronLeft  } from 'lucide-react'
+import { Menu, CircleChevronRight, Facebook, Instagram, Twitter, CircleChevronLeft } from 'lucide-react'
 
 export default function Home() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const testimonials = [
     {
@@ -26,14 +27,14 @@ export default function Home() {
         "Participar dessa iniciativa foi transformador. Estou feliz em contribuir para um mundo melhor.",
     },
     {
-      image: User3, 
+      image: User3,
       name: "Manubs fest",
       role: "Restaurante Parceiro",
       message:
         "Reduzimos o desperdício e ajudamos quem mais precisa. Sabor Solidário é incrível!",
     },
     {
-      image: User2, 
+      image: User2,
       name: "Mariana Oliveira",
       role: "Doadora",
       message:
@@ -49,10 +50,24 @@ export default function Home() {
     setCurrentSlide((prev) => (prev < testimonials.length - 1 ? prev + 1 : 0));
   };
 
+  // Header fixo 
+  // verificar a posição da página
+  useEffect(() => {
+    const handleScroll = () => {
+      setHasScrolled(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="container h-screen w-screen min-w-screen">
       {/* Header */}
-      <nav className="flex lg:pt-2 justify-around items-center wx-auto w-screen h-[12%] sticky top-0 left-0 bg-white">
+      <nav
+        className={`flex lg:pt-2 justify-around items-center w-screen h-[12%] sticky top-0 bg-white z-50 
+          ${hasScrolled ? "shadow-md" : ""} transition-shadow duration-300`}
+      >
         <div>
           <Link href='/'>
             <Image className="w-[90px] object-cover" src={logo} alt="Logo" />
@@ -105,7 +120,7 @@ export default function Home() {
       )}
 
       {/* HeroSection leading-none  */}
-      <div className="flex flex-col pt-10 text-center px-14 lg:pb-6 lg:flex-row justify-center items-center w-screen h-auto lg:text-start">
+      <div className=" flex flex-col pt-10 text-center px-14 lg:pb-6 lg:flex-row justify-center items-center w-screen h-auto lg:text-start">
         <div className="flex flex-col flex-1 md:px-9">
           <h1 className="text-[50px] leading-none md:text-[55px] lg:text-[65px] lg:w-[90%] w-[100%] lg:leading-none font-bold tracking-[-.03em]">
             <span className="text-second-pink">Juntos</span>, podemos construir um futuro melhor<span className="text-second-pink">!</span>
@@ -193,7 +208,7 @@ export default function Home() {
         <div className="flex flex-col flex-1 gap-1 md:px-14 text-center lg:text-start px-10">
           <p className="text-center lg:text-start text-xl md:text-2xl text-second-pink font-semibold pb-1">Sobre nós</p>
           <p className="font-bold text-text-bro text-lg md:text-2xl">Nossa missão e nosso objetivo</p>
-          <p className=" leading-[.90rem] text-xs md:text-sm text-text-bro font-normal lg:text-start lg:p-0">No Sabor Solidário, nossa missão é transformar a luta contra o desperdício de alimentos em uma comunidade vibrante e conectada. Estamos comprometidos em criar uma ponte significativa entre restaurantes generosos, voluntários dedicados e doadores conscientes, unindo esforços para reduzir o desperdício de alimentos e promover a solidariedade.
+          <p className=" leading-[.90rem] lg:w-[80%] text-xs md:text-sm text-text-bro font-normal lg:text-start lg:p-0">No Sabor Solidário, nossa missão é transformar a luta contra o desperdício de alimentos em uma comunidade vibrante e conectada. Estamos comprometidos em criar uma ponte significativa entre restaurantes generosos, voluntários dedicados e doadores conscientes, unindo esforços para reduzir o desperdício de alimentos e promover a solidariedade.
             <br /> <br />
             Temos uma visão clara e metas definidas para transformar a iniciativa em realidade. Nossos objetivos refletem nosso compromisso em combater o desperdício de alimentos e promover uma comunidade mais solidária.</p>
 
@@ -201,55 +216,55 @@ export default function Home() {
 
       </div>
 
-        {/* Depoimentos */}
-        <div className="w-screen bg-second-yellow py-10">
-          <h2 className="text-center text-2xl md:text-3xl font-bold text-second-pink">Depoimentos</h2>
-          <p className="text-center text-sm md:text-lg text-gray-600 my-4">Veja o que nossos parceiros e voluntários dizem sobre nós</p>
+      {/* Depoimentos */}
+      <div className="w-screen bg-second-yellow py-10">
+        <h2 className="text-center text-2xl md:text-3xl font-bold text-second-pink">Depoimentos</h2>
+        <p className="text-center text-sm md:text-lg text-gray-600 my-4">Veja o que nossos parceiros e voluntários dizem sobre nós</p>
 
-          {/* Carrossel */}
-          <div className="relative flex flex-col items-center justify-center">
-            <div className="flex overflow-hidden w-[90vw] lg:w-[60vw]">
-              <div
-                className="flex transition-transform duration-300"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {testimonials.map((testimonial, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center text-center px-4 min-w-[100%]"
-                  >
-                    <Image
-                      className="rounded-full border-4 border-second-pink shadow-md"
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      width={80}
-                      height={80}
-                    />
-                    <p className="font-bold text-gray-800 text-lg mt-4">{testimonial.name}</p>
-                    <p className="italic text-gray-600 text-sm my-2">{testimonial.role}</p>
-                    <p className="text-gray-700 text-sm md:text-base">{testimonial.message}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Botões de Navegação */}
-            <div className="flex mt-4 gap-2">
-              <button
-                onClick={prevSlide}
-                disabled={currentSlide === 0}
-              >
-              <CircleChevronLeft className="text-second-pink w-7 h-7 hover:scale-110 hover:text-second-pink-hover cursor-pointer transition-transform" />
-              </button>
-              <button
-                onClick={nextSlide}
-                disabled={currentSlide === testimonials.length - 1}
-              >
-              <CircleChevronRight className="text-second-pink w-7 h-7 hover:scale-110 hover:text-second-pink-hover cursor-pointer transition-transform" />
-              </button>
+        {/* Carrossel */}
+        <div className="relative flex flex-col items-center justify-center">
+          <div className="flex overflow-hidden w-[90vw] lg:w-[60vw]">
+            <div
+              className="flex transition-transform duration-300"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+            >
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center text-center px-4 min-w-[100%]"
+                >
+                  <Image
+                    className="rounded-full border-4 border-second-pink shadow-md"
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    width={80}
+                    height={80}
+                  />
+                  <p className="font-bold text-gray-800 text-lg mt-4">{testimonial.name}</p>
+                  <p className="italic text-gray-600 text-sm my-2">{testimonial.role}</p>
+                  <p className="text-gray-700 text-sm md:text-base">{testimonial.message}</p>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* Botões de Navegação */}
+          <div className="flex mt-4 gap-2">
+            <button
+              onClick={prevSlide}
+              disabled={currentSlide === 0}
+            >
+              <CircleChevronLeft className="text-second-pink w-7 h-7 hover:scale-110 hover:text-second-pink-hover cursor-pointer transition-transform" />
+            </button>
+            <button
+              onClick={nextSlide}
+              disabled={currentSlide === testimonials.length - 1}
+            >
+              <CircleChevronRight className="text-second-pink w-7 h-7 hover:scale-110 hover:text-second-pink-hover cursor-pointer transition-transform" />
+            </button>
+          </div>
         </div>
+      </div>
 
       {/* Footer */}
       <div className="flex w-screen flex-col md:flex-row gap-5 items-center justify-center md:justify-evenly h-auto md:h-[45vh] bg-second-green p-5 md:w-screen">
@@ -283,7 +298,6 @@ export default function Home() {
           <ul className="flex flex-col gap-2">
             <Link className="hover:text-second-pink font-bold transition-colors duration-200" href="/"><li>Home</li></Link>
             <Link className="hover:text-second-pink font-bold transition-colors duration-200" href="/"><li>Sobre nós</li></Link>
-            <Link className="hover:text-second-pink font-bold transition-colors duration-200" href="/"><li>Contato</li></Link>
             <Link className="hover:text-second-pink font-bold transition-colors duration-200" href="/cadastro"><li>Cadastre-se</li></Link>
           </ul>
         </div>
