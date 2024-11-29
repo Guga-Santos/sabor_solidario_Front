@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../assets/login-login-teste.svg';
 import imagensUser from '../../assets/bg-heeerosectionsvg.svg';
-import { Plus, UserPen, CalendarDays, LaptopMinimalCheck, FileClock, LogOut, ImageUp, Filter } from 'lucide-react';
+import { Plus, UserPen, CalendarDays, LaptopMinimalCheck, FileClock, LogOut, ImageUp } from 'lucide-react';
 
 export default function PerfilVoluntario() {
 
@@ -38,6 +38,33 @@ export default function PerfilVoluntario() {
         } catch (error) {
             setMensagem("Ocorreu um erro ao enviar o comprovante. Tente novamente.");
         }
+    };
+
+    // AGENDAR RETIRADA
+    // Mock de campanhas cadastradas (simula o banco de dados)
+    const campanhasMock = [
+        { id: 1, nome: 'Restaurante Solidário', dia: 'Segunda', horario: '12h-15h', tipo: 'Frutas', validade: '2024-12-10' },
+        { id: 2, nome: 'Lanchonete Esperança', dia: 'Terça', horario: '14h-17h', tipo: 'Pães', validade: '2024-12-20' },
+        { id: 3, nome: 'Buffet Amor ao Próximo', dia: 'Quarta', horario: '11h-13h', tipo: 'Carnes', validade: '2024-12-15' },
+        { id: 4, nome: 'Restaurante da Comunidade', dia: 'Sexta', horario: '9h-12h', tipo: 'Vegetais', validade: '2024-11-30' },
+    ];
+
+    // Estados
+    const [resultados, setResultados] = useState([]); // Campanhas exibidas na tela
+
+    // Mostrar todas as campanhas
+    const handleMostrarTudo = () => {
+        setResultados(campanhasMock);
+    };
+
+    // Limpar resultados
+    const handleLimpar = () => {
+        setResultados([]);
+    };
+
+    // Função para agendar retirada
+    const handleAgendar = (campanhaId) => {
+        alert(`Retirada da campanha ID: ${campanhaId} foi agendada com sucesso!`);
     };
 
     return (
@@ -115,12 +142,44 @@ export default function PerfilVoluntario() {
                                     />
                                 </li>
                             </ul>
-                            <button
-                                type="button"
-                                className="w-full mt-6 bg-second-pink text-white font-bold p-3 rounded-lg text-sm lg:text-base hover:bg-second-pink-hover">
-                                Localizar
-                            </button>
+                            <div className="flex gap-4 mt-6">
+                                <button
+                                    onClick={handleMostrarTudo}
+                                    type="button"
+                                    className="flex-1 bg-second-pink text-white font-bold p-3 rounded-lg text-sm lg:text-base hover:bg-second-pink-hover hover:scale-105 transition">
+                                    Localizar
+                                </button>
+                                <button
+                                    onClick={handleLimpar}
+                                    type="button"
+                                    className="flex-1 border-2 border-solid border-second-pink text-second-pink-hover font-bold p-3 rounded-lg text-sm lg:text-base hover:bg-second-pink hover:text-white transition">
+                                    Limpar
+                                </button>
+                            </div>
                         </form>
+
+                        {/* Lista de campanhas */}
+                        {resultados.length > 0 && (
+                            <div className="mt-6">
+                                <h4 className="text-lg font-bold">Campanhas Disponíveis:</h4>
+                                <ul className="mt-4 space-y-3">
+                                    {resultados.map((campanha) => (
+                                        <li
+                                            key={campanha.id}
+                                            className="bg-gray-100 p-4 rounded-lg shadow flex justify-between items-center text-sm text-gray-800">
+                                            <span>
+                                                {campanha.nome} - {campanha.dia}, {campanha.horario}
+                                            </span>
+                                            <button
+                                                onClick={() => handleAgendar(campanha.id)}
+                                                className="bg-second-pink text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-second-pink-hover">
+                                                Agendar
+                                            </button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
 
                     {/* Agendamento e enviar comprovante */}
@@ -140,7 +199,6 @@ export default function PerfilVoluntario() {
                                     htmlFor="file-upload"
                                     className="flex items-center justify-center w-full h-14 bg-gray-100 border-2 border-dashed border-gray-300 text-gray-400 rounded-lg cursor-pointer hover:border-second-pink-hover hover:text-second-pink transition"
                                 >
-                                    <ImageUp className="w-6 h-6 mr-2" />
                                     <span className="text-xs">
                                         {comprovante ? comprovante.name : "Clique aqui para anexar o comprovante"}
                                     </span>
