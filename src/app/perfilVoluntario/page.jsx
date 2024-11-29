@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../assets/login-login-teste.svg';
 import imagensUser from '../../assets/bg-heeerosectionsvg.svg';
+import woman from '../../assets/woman.svg'
 import { Plus, UserPen, CalendarDays, LaptopMinimalCheck, FileClock, LogOut, ImageUp } from 'lucide-react';
 
 export default function PerfilVoluntario() {
@@ -109,12 +110,12 @@ export default function PerfilVoluntario() {
 
                     <div className="flex gap-3 items-center">
                         <div className="flex flex-col items-end">
-                            <h4 className="font-bold text-second-pink-hover text-sm lg:text-base">Nome do Voluntário</h4>
-                            <span className="text-xs font-semibold lg:text-sm">CNPJ</span>
+                            <h4 className="font-bold text-second-pink-hover text-sm lg:text-base">Joana Silva</h4>
+                            <span className="text-xs font-semibold lg:text-sm">000.000.000-01</span>
                         </div>
                         <Image
-                            src={imagensUser}
-                            className="w-10 h-10 lg:w-14 lg:h-14 rounded-xl border border-solid border-gray-400"
+                            src={woman}
+                            className="object-cover w-10 h-10 lg:w-14 lg:h-14 rounded-xl border border-solid border-gray-400"
                             alt="Imagem de perfil"
                         />
                     </div>
