@@ -11,19 +11,21 @@ import { cadastrarTransacoes, deletarAgendamento, getCampanhaByID, getCampanhas,
 
 export default function PerfilVoluntario() {
     const [agendamentos, setAgendamentos] = useState([])
-    const [resultados, setResultados] = useState([]); // Campanhas exibidas na tela
+    const [resultados, setResultados] = useState([]); 
+    const [disponiveis, setDisponiveis] = useState([])
     const [click, setClick] = useState(true);
     
     useEffect(() => {
         const voluntario = async () => {
             const id = localStorage.getItem('ID')
-            console.log('ID:', id)
+
             const user = await getVoluntarioByID(id)
-            console.log(user)
+
             setUserVol(user)
 
             const result = await getCampanhas()
             setResultados(result);
+            setDisponiveis(result.filter((ele) => ele.disponivel))
 
             const agendas = await getTransacoes()
             setAgendamentos(agendas)
@@ -93,16 +95,18 @@ export default function PerfilVoluntario() {
             campanha,
             voluntario
         })
-        
-        setClick(!click)
+
         alert(`Retirada da campanha ID: ${id} foi agendada com sucesso!`);
+        await updateCampanha(id, {disponivel: false})
+        setClick(!click)
         
     };
     
-    const handleCancelar = async (e) => {
-        await deletarAgendamento(e.target.id)
+    const handleCancelar = async (data) => {
+        await updateCampanha(data.dois, {disponivel: true})
+        await deletarAgendamento(data.um)
+        alert(`Agendamento ${data.um} foi cancelada com sucesso!`);
         setClick(!click)
-        alert(`Campanha ${e.target.id} foi cancelada com sucesso!`);
     }
 
     return (
@@ -201,7 +205,7 @@ export default function PerfilVoluntario() {
                             <div className="mt-6">
                                 <h4 className="text-lg font-bold">Campanhas Disponíveis:</h4>
                                 <ul className="mt-4 space-y-3">
-                                    {resultados.map((campanha, index) => (
+                                    {disponiveis.map((campanha, index) => (
                                         <li
                                             key={index}
                                             className="bg-gray-100 p-4 rounded-lg shadow flex justify-between items-center text-sm text-gray-800">
@@ -235,13 +239,17 @@ export default function PerfilVoluntario() {
                                         key={index}
                                         className="bg-gray-100 m-2 p-4 rounded-lg shadow flex justify-between items-center text-sm text-gray-800">
                                         <span>
-                                            {`${resultados.filter((ele) => ele.id_campanha == campanha.campanha)[0].titulo}`}
+                                            {`${resultados.filter((ele) => ele.id_campanha == campanha.campanha)[0]?.titulo}`}
                                             <br />
-                                            {`Dia: ${resultados.filter((ele) => ele.id_campanha == campanha.campanha)[0].data_inicio?.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1')}`} 
+                                            {`Dia: ${resultados.filter((ele) => ele.id_campanha == campanha.campanha)[0]?.data_inicio?.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1')}`} 
                                         </span>
                                         <button
                                             id={campanha.id_transacao}
-                                            onClick={(e) => handleCancelar(e)}
+                                            onClick={() => handleCancelar({
+                                                um: campanha.id_transacao,
+                                                dois: campanha.campanha
+                                                
+                                            })}
                                             className="bg-second-pink text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-second-pink-hover">
                                             Cancelar
                                         </button>

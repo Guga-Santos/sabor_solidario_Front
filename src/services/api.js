@@ -131,7 +131,7 @@ export async function cadastrarTransacoes(data) {
 
 export async function updateCampanha(id, data) {
     try {
-        const update = await axios.put(`http://127.0.0.1:8000/campanhas/update/${id}/`, data);
+        const update = await axios.put(`http://127.0.0.1:8000/campanhas/update/${id}`, data);
         return update;
     } catch (e) {
         if (e.response) {
@@ -141,6 +141,7 @@ export async function updateCampanha(id, data) {
         }
     }
 }
+
 
 
 
