@@ -7,9 +7,11 @@ import logo from '../../assets/login-login-teste.svg'
 import imagensUser from '../../assets/bg-heeerosectionsvg.svg'
 import fotoRestaurante from '../../assets/food.svg'
 import { Plus, UserPen, CalendarDays, LaptopMinimalCheck, FileClock, LogOut } from 'lucide-react'
-import { getRestauranteByID } from "@/services/api";
+import { cadastrarCampanhas, deletarCampanha, getCampanhas, getRestauranteByID } from "@/services/api";
 
 export default function PerfilRestaurante() {
+    const [campanhas, setCampanhas] = useState([]);
+
     useEffect(() => {
         const restaurante = async () => {
             const id = localStorage.getItem('ID')
@@ -21,19 +23,40 @@ export default function PerfilRestaurante() {
 
         restaurante()
     }, []) 
-
     // criando as variáveis usando useState para armazenar e poder manipular, ela começa varia e quando o valor é alterado, é armanezada seguindo a lista na "setFormData".
     // campanhas, armazena uma lista de campanhas.. assim que uma nova campanha é adicionada, é inserida nesse estado "setCampanhas".
     const [formData, setFormData] = useState({
-        nome: "",
-        resumo: "",
-        dias: "",
-        horarios: "",
+        titulo: "",
+        descricao: "",
+        data_inicio: "",
         tipo: "",
-        validade: "",
+        data_fim: "",
+        horario: ""
     });
-    const [campanhas, setCampanhas] = useState([]);
     const [userRest, setUserRest] = useState("");
+    const [confirma, setConfirma] = useState(false);
+
+    useEffect(() => {
+        if (
+            formData.titulo &&
+            formData.descricao &&
+            formData.data_inicio &&
+            formData.tipo &&
+            formData.data_fim &&
+            formData.horario
+        ) {
+            setConfirma(true)
+        } else {
+            setConfirma(false)
+        }
+
+        const campanhas = async () => {
+            const lista = await getCampanhas()
+            setCampanhas(lista)
+        }
+        campanhas()
+
+    },[formData])
 
 
     // Lidar com inputs do formulário -  lógica que permite que os campos do formulário sejam controlados pelo React, garantindo a sincronização entre o valor exibido e o estado.
@@ -43,32 +66,46 @@ export default function PerfilRestaurante() {
     };
 
     // Adicionar nova campanha (verifica se todos os campos foram preenchidos, adiciona o objeto formData na lista de campanhas e por fim depois de apertar o botão, o formulário se limpa para que o user possa digitar mais campanhas)
-    const handleAddCampanha = () => {
+    const handleAddCampanha = async () => {
         if (
-            formData.nome &&
-            formData.resumo &&
-            formData.dias &&
-            formData.horarios &&
+            formData.titulo &&
+            formData.descricao &&
+            formData.data_inicio &&
             formData.tipo &&
-            formData.validade
+            formData.data_fim &&
+            formData.horario
         ) {
-            setCampanhas([...campanhas, formData]);
+            await cadastrarCampanhas(
+                {...formData, 
+                    disponivel: true,
+                    restaurante: localStorage.getItem('ID'),
+                    horario: formData.horario + ":00"})
+            
             setFormData({
-                nome: "",
-                resumo: "",
-                dias: "",
-                horarios: "",
+                titulo: "",
+                descricao: "",
+                data_inicio: "",
                 tipo: "",
-                validade: "",
-            });
+                data_fim: "",
+                horario: ""
+            })
         } else {
             alert("Por favor, preencha todos os campos!");
         }
     };
 
     // Remover campanha
-    const handleRemoveCampanha = (index) => {
-        setCampanhas(campanhas.filter((_, i) => i !== index));
+    const handleRemoveCampanha = async (e) => {
+        const result = await deletarCampanha(e.target.id)
+        console.log(result)
+        setFormData({
+            titulo: "",
+            descricao: "",
+            data_inicio: "",
+            tipo: "",
+            data_fim: "",
+            horario: ""
+        })
     };
 
 
@@ -114,7 +151,7 @@ export default function PerfilRestaurante() {
                     <div className="flex gap-3 items-center">
                         <div className="flex flex-col items-end">
                             <h4 className="font-bold text-second-green-hover text-sm lg:text-base">{userRest?.nome_fantasia}</h4>
-                            <span className="text-xs font-semibold lg:text-sm">{userRest?.CNPJ}</span>
+                            <span className="text-xs font-semibold lg:text-sm">{userRest?.CNPJ?.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5") }</span>
                         </div>
                         <Image
                             src={fotoRestaurante}
@@ -142,9 +179,9 @@ export default function PerfilRestaurante() {
                                     </label>
                                     <input
                                         type="text"
-                                        name="nome"
-                                        value={formData.nome}
-                                        onChange={handleInputChange}
+                                        name="titulo"
+                                        value={formData.titulo}
+                                        onChange={(e) => handleInputChange(e)}
                                         required
                                         className="inputs w-full mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-3 text-xs lg:text-sm focus:border-second-green"
                                         placeholder="Escreva aqui nome do seu produto"
@@ -156,9 +193,9 @@ export default function PerfilRestaurante() {
                                     </label>
                                     <input
                                         type="text"
-                                        name="resumo"
-                                        value={formData.resumo}
-                                        onChange={handleInputChange}
+                                        name="descricao"
+                                        value={formData.descricao}
+                                        onChange={(e) => handleInputChange(e)}
                                         required
                                         className="inputs w-full mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-3 text-xs lg:text-sm focus:border-second-green"
                                         placeholder="Escreva aqui sobre seu produto"
@@ -171,9 +208,9 @@ export default function PerfilRestaurante() {
                                         </label>
                                         <input
                                             type="date"
-                                            name="dias"
-                                            value={formData.dias}
-                                            onChange={handleInputChange}
+                                            name="data_inicio"
+                                            value={formData.data_inicio}
+                                            onChange={(e) => handleInputChange(e)}
                                             required
                                             className="inputs w-full mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-3 text-xs lg:text-sm focus:border-second-green"
                                         />
@@ -184,10 +221,9 @@ export default function PerfilRestaurante() {
                                         </label>
                                         <input
                                             type="time"
-                                            name="horarios"
-                                            value={formData.horarios}
-                                            onChange={handleInputChange}
-                                            required
+                                            name="horario"
+                                            value={formData.horario}
+                                            onChange={(e) => handleInputChange(e)}
                                             className="inputs w-full mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-3 text-xs lg:text-sm focus:border-second-green"
                                         />
                                     </li>
@@ -199,7 +235,7 @@ export default function PerfilRestaurante() {
                                             type="text"
                                             name="tipo"
                                             value={formData.tipo}
-                                            onChange={handleInputChange}
+                                            onChange={(e) => handleInputChange(e)}
                                             required
                                             className="inputs w-full mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-3 text-xs lg:text-sm focus:border-second-green"
                                             placeholder="Escreva tipo de alimento"
@@ -211,9 +247,9 @@ export default function PerfilRestaurante() {
                                         </label>
                                         <input
                                             type="date"
-                                            name="validade"
-                                            value={formData.validade}
-                                            onChange={handleInputChange}
+                                            name="data_fim"
+                                            value={formData.data_fim}
+                                            onChange={(e) => handleInputChange(e)}
                                             required
                                             className="inputs w-full mt-1 bg-slate-100 border-s-4 rounded-md outline-none p-3 text-xs lg:text-sm focus:border-second-green"
                                         />
@@ -222,8 +258,8 @@ export default function PerfilRestaurante() {
                             </ul>
                             <button
                                 type="button"
-                                onClick={handleAddCampanha}
-                                className="w-full mt-6 bg-second-green text-white font-bold p-3 rounded-lg text-sm lg:text-base hover:bg-second-green-hover"
+                                onClick={() => handleAddCampanha()}
+                                className={`${!confirma ? "bg-second-green" : "bg-second-pink"} w-full mt-6 text-white font-bold p-3 rounded-lg text-sm lg:text-base hover:bg-second-green-hover`}
                             >
                                 Cadastrar
                             </button>
@@ -235,20 +271,21 @@ export default function PerfilRestaurante() {
                         {/* Campanhas ativas */}
                         <div className="bg-white rounded-2xl p-6">
                             <h3 className="text-xl lg:text-2xl font-bold">Campanhas Ativas</h3>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                            <div className="grid lg:grid-cols-* sm:grid-cols-* gap-4 mt-4">
                                 {campanhas.map((campanha, index) => (
                                     <div
                                         key={index}
-                                        className="border border-gray-300 rounded-xl p-4 flex justify-between items-center"
+                                        className="border border-gray-300 w-96 rounded-xl p-4 flex justify-between items-center"
                                     >
                                         <div className="text-xs lg:text-sm">
-                                            <p>Nome: {campanha.nome}</p>
-                                            <p>Dia: {campanha.dias}</p>
-                                            <p>Validade: {campanha.validade}</p>
+                                            <p>Nome: {campanha.titulo}</p>
+                                            <p>Dia: {campanha.data_inicio}</p>
+                                            <p>Validade: {campanha.data_fim}</p>
                                         </div>
                                         <button
                                             className="p-2 text-xs lg:text-sm text-red-500 font-semibold border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white"
-                                            onClick={() => handleRemoveCampanha(index)}
+                                            onClick={(e) => handleRemoveCampanha(e)}
+                                            id={campanha.id_campanha}
                                         >
                                             Cancelar
                                         </button>

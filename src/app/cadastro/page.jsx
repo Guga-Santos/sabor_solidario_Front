@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import Image from "next/image";
 import logo from '../../assets/login-login-teste.svg'
@@ -9,6 +10,11 @@ import Instrucoes from "@/components/Instrucao";
 import { ArrowRight  } from 'lucide-react'
 
 export default function Cadastro() {
+
+    function handleBack() {
+
+    }
+ 
     return <div className="flex flex-col lg:flex-row w-screen h-screen">
         {/* Seção Principal */}
         <div className="flex flex-col justify-center items-center w-screen h-screen gap-5">
@@ -55,7 +61,11 @@ export default function Cadastro() {
 
         <aside className="hidden lg:flex flex-col w-[40%] md:w-[30%] justify-evenly items-center bg-second-yellow text-center">
             <div className="absolute left-7 top-8 w-7">
-                <button><Image src={voltar} alt="seta voltar" /></button>
+                <button
+                type="button"
+                onClick={() => window.history.back()}>
+                    <Image src={voltar} alt="seta voltar" />
+                </button>
             </div>
 
             <Link href="/">

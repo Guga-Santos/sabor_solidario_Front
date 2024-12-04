@@ -45,8 +45,6 @@ export default function CadastroRestaurante() {
         }
     }
 
-    
-
     useEffect(() => {
         // chamado do arquivo restaurante.json - mock
 
@@ -56,9 +54,6 @@ export default function CadastroRestaurante() {
         }
         if (email.length < 3) setData(false)
     }, [email, confirma])
-
-    // useEffect(() => {}, [])
-
 
     // Validação de estrutura email e senha. E se ambos são iguais. 
     const handleChange = () => {
@@ -97,8 +92,8 @@ export default function CadastroRestaurante() {
               post({
                 "razao_social": razaoSocial,
                 "nome_fantasia": nomeFantasia,
-                "CNPJ": cnpj,
-                "telefone": telefone,
+                "CNPJ": cnpj.replace(/\D/g, ""),
+                "telefone": telefone.replace(/\D/g, ""),
                 "email": email,
                 "senha": password,
                 "endereco": {
@@ -108,9 +103,11 @@ export default function CadastroRestaurante() {
                     "bairro": bairro,
                     "cidade": cidade,
                     "estado": "PE",
-                    "cep": cep
+                    "cep": cep.replace(/\D/g, "")
                 }
             })
+
+            window.location = "/login"
         }
     }
 
@@ -118,7 +115,12 @@ export default function CadastroRestaurante() {
     return (
         <div className="flex flex-col lg:flex-row w-screen h-screen">
             <div className="flex gap-8 flex-col w-screen lg:w-[40%] lg:gap-0 h-full justify-evenly items-center py-10 lg:py-4 bg-second-yellow text-center">
-                <div className="absolute left-7 top-8 w-7"><button><Image src={voltar} alt="botão Voltar" /></button></div>
+                <div className="absolute left-7 top-8 w-7">
+                    <button
+                    type='button'
+                    onClick={() => window.history.back()}>
+                        <Image src={voltar} alt="botão Voltar" />
+                        </button></div>
 
                 <Link href="/">
                     <Image className="w-[100px] lg:w-[120px]" src={logo} alt="Logo" />
@@ -169,7 +171,7 @@ export default function CadastroRestaurante() {
 
                     <div>
                         <button
-                            className="bg-second-green text-white hover:bg-second-green-hover hover:scale-105 transition-all w-[100%] h-[55px] rounded-xl font-bold mt-2"
+                            className={`${confirma > 2 ? "bg-second-pink" : "bg-second-green" } text-white hover:bg-second-green-hover hover:scale-105 transition-all w-[100%] h-[55px] rounded-xl font-bold mt-2`}
                             type="button"
                             value="cadastrar"
                             onClick={() => handleChange()}>

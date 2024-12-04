@@ -98,8 +98,8 @@ export default function CadastroVoluntario() {
 
                 post({
                     "nome": nomeCompleto,
-                    "CPF": cpf,
-                    "telefone": telefone,
+                    "CPF": cpf.replace(/\D/g, ""),
+                    "telefone": telefone.replace(/\D/g, ""),
                     "grupo": nomeGrupo,
                     "email": email,
                     "senha": password,
@@ -110,10 +110,10 @@ export default function CadastroVoluntario() {
                         "bairro": bairro,
                         "cidade": cidade,
                         "estado": "PE",
-                        "cep": cep
+                        "cep": cep.replace(/\D/g, "")
                     }
                 })
-
+                window.location = "/login"
             }
         }
 
@@ -122,7 +122,12 @@ export default function CadastroVoluntario() {
     <div className="flex flex-col lg:flex-row w-screen h-screen">
         {/* Tela apresentação dados */}
         <div className="flex gap-8 flex-col w-screen lg:w-[40%] lg:gap-0 h-full justify-evenly items-center py-10 lg:py-4 bg-second-yellow text-center">
-            <div className="absolute left-7 top-8 w-7"><button><Image src={voltar} alt="botão Voltar" /></button></div>
+            <div className="absolute left-7 top-8 w-7">
+                <button
+                type='button'
+                onClick={() => window.history.back()}>
+                    <Image src={voltar} alt="botão Voltar" />
+                    </button></div>
 
             <Link href="/">
                 <Image className="w-[100px] lg:w-[120px]" src={logo} alt="Logo" />
@@ -144,6 +149,7 @@ export default function CadastroVoluntario() {
                             <label className='flex items-center justify-center gap-1'>
                                 <input 
                                 type="checkbox" 
+                                onChange={(e) => checkbox(e)}
                                 required/>
                                 Confirmo que sou maior de idade.
                             </label>
@@ -152,6 +158,7 @@ export default function CadastroVoluntario() {
                             <label className='flex items-center justify-center gap-1'>
                                 <input 
                                 type="checkbox"
+                                onChange={(e) => checkbox(e)}
                                 required />
                                 Li e aceito a política de privacidade.
                             </label>
@@ -160,6 +167,7 @@ export default function CadastroVoluntario() {
                             <label  className='flex items-center justify-center gap-1'>
                                 <input 
                                 type="checkbox"
+                                onChange={(e) => checkbox(e)}
                                 required />
                                 Li e aceito os termos e condições.
                             </label>
@@ -169,7 +177,7 @@ export default function CadastroVoluntario() {
 
                 <div>
                     <button
-                    className="bg-second-pink text-white hover:bg-second-pink-hover hover:scale-105 transition-all w-[100%] h-[55px] rounded-xl font-bold mt-2"
+                    className={`${confirma > 2 ? "bg-second-pink" : "bg-second-green" } text-white hover:bg-second-green-hover hover:scale-105 transition-all w-[100%] h-[55px] rounded-xl font-bold mt-2`}
                     type="button" 
                     value="cadastrar" 
                     onClick={() => handleChange()}>

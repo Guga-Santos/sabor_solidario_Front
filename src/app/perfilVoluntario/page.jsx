@@ -1,14 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../assets/login-login-teste.svg';
 import imagensUser from '../../assets/bg-heeerosectionsvg.svg';
 import woman from '../../assets/woman.svg'
 import { Plus, UserPen, CalendarDays, LaptopMinimalCheck, FileClock, LogOut, ImageUp } from 'lucide-react';
+import { cadastrarTransacoes, deletarAgendamento, getCampanhaByID, getCampanhas, getTransacoes, getVoluntarioByID, updateCampanha } from '@/services/api';
 
 export default function PerfilVoluntario() {
+    const [agendamentos, setAgendamentos] = useState([])
+    const [resultados, setResultados] = useState([]); // Campanhas exibidas na tela
+    const [click, setClick] = useState(true);
+    
+    useEffect(() => {
+        const voluntario = async () => {
+            const id = localStorage.getItem('ID')
+            console.log('ID:', id)
+            const user = await getVoluntarioByID(id)
+            console.log(user)
+            setUserVol(user)
+
+            const result = await getCampanhas()
+            setResultados(result);
+
+            const agendas = await getTransacoes()
+            setAgendamentos(agendas)
+        }
+        voluntario()
+    }, [click]) 
+
+    const [userVol, setUserVol] = useState("")
 
     // Funções do envio do comprovante
     const [comprovante, setComprovante] = useState(null); // Armazena o arquivo selecionado
@@ -41,21 +64,13 @@ export default function PerfilVoluntario() {
         }
     };
 
-    // AGENDAR RETIRADA
-    // Mock de campanhas cadastradas (simula o banco de dados)
-    const campanhasMock = [
-        { id: 1, nome: 'Restaurante Solidário', dia: 'Segunda', horario: '12h-15h', tipo: 'Frutas', validade: '2024-12-10' },
-        { id: 2, nome: 'Lanchonete Esperança', dia: 'Terça', horario: '14h-17h', tipo: 'Pães', validade: '2024-12-20' },
-        { id: 3, nome: 'Buffet Amor ao Próximo', dia: 'Quarta', horario: '11h-13h', tipo: 'Carnes', validade: '2024-12-15' },
-        { id: 4, nome: 'Restaurante da Comunidade', dia: 'Sexta', horario: '9h-12h', tipo: 'Vegetais', validade: '2024-11-30' },
-    ];
-
     // Estados
-    const [resultados, setResultados] = useState([]); // Campanhas exibidas na tela
 
     // Mostrar todas as campanhas
-    const handleMostrarTudo = () => {
-        setResultados(campanhasMock);
+    const handleMostrarTudo = async () => {
+        const result = await getCampanhas()
+        setResultados(result);
+        setClick(!click)
     };
 
     // Limpar resultados
@@ -64,9 +79,31 @@ export default function PerfilVoluntario() {
     };
 
     // Função para agendar retirada
-    const handleAgendar = (campanhaId) => {
-        alert(`Retirada da campanha ID: ${campanhaId} foi agendada com sucesso!`);
+    const handleAgendar = async (id) => {
+        const campanhaEscolhida = await getCampanhaByID(id);
+        
+        const data_retirada = campanhaEscolhida.data_inicio;
+        const status = 'Pendente';
+        const campanha = id;
+        const voluntario = localStorage.getItem('ID');
+        
+        await cadastrarTransacoes({
+            data_retirada,
+            status,
+            campanha,
+            voluntario
+        })
+        
+        setClick(!click)
+        alert(`Retirada da campanha ID: ${id} foi agendada com sucesso!`);
+        
     };
+    
+    const handleCancelar = async (e) => {
+        await deletarAgendamento(e.target.id)
+        setClick(!click)
+        alert(`Campanha ${e.target.id} foi cancelada com sucesso!`);
+    }
 
     return (
         <div className="flex w-screen h-screen">
@@ -110,8 +147,8 @@ export default function PerfilVoluntario() {
 
                     <div className="flex gap-3 items-center">
                         <div className="flex flex-col items-end">
-                            <h4 className="font-bold text-second-pink-hover text-sm lg:text-base">Joana Silva</h4>
-                            <span className="text-xs font-semibold lg:text-sm">000.000.000-01</span>
+                            <h4 className="font-bold text-second-pink-hover text-sm lg:text-base">{userVol?.nome}</h4>
+                            <span className="text-xs font-semibold lg:text-sm">{userVol?.CPF?.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4")}</span>
                         </div>
                         <Image
                             src={woman}
@@ -160,19 +197,23 @@ export default function PerfilVoluntario() {
                         </form>
 
                         {/* Lista de campanhas */}
-                        {resultados.length > 0 && (
+                        {resultados?.length > 0 && (
                             <div className="mt-6">
                                 <h4 className="text-lg font-bold">Campanhas Disponíveis:</h4>
                                 <ul className="mt-4 space-y-3">
-                                    {resultados.map((campanha) => (
+                                    {resultados.map((campanha, index) => (
                                         <li
-                                            key={campanha.id}
+                                            key={index}
                                             className="bg-gray-100 p-4 rounded-lg shadow flex justify-between items-center text-sm text-gray-800">
                                             <span>
-                                                {campanha.nome} - {campanha.dia}, {campanha.horario}
+                                                {`${campanha?.titulo}`}
+                                                <br />
+                                                {`Dia: ${campanha?.data_inicio?.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1')},   `} 
+                                                {`a partir das ${campanha?.horario}`}
                                             </span>
                                             <button
-                                                onClick={() => handleAgendar(campanha.id)}
+                                                id={campanha.id_campanha}
+                                                onClick={({target}) => handleAgendar(target.id)}
                                                 className="bg-second-pink text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-second-pink-hover">
                                                 Agendar
                                             </button>
@@ -188,6 +229,25 @@ export default function PerfilVoluntario() {
                         {/* Agendamento */}
                         <div className="bg-white rounded-2xl mb-5 p-6">
                             <h3 className="text-xl lg:text-2xl font-bold">Agendamentos</h3>
+                            {
+                                agendamentos.map((campanha, index) => (
+                                    <li
+                                        key={index}
+                                        className="bg-gray-100 m-2 p-4 rounded-lg shadow flex justify-between items-center text-sm text-gray-800">
+                                        <span>
+                                            {`${resultados.filter((ele) => ele.id_campanha == campanha.campanha)[0].titulo}`}
+                                            <br />
+                                            {`Dia: ${resultados.filter((ele) => ele.id_campanha == campanha.campanha)[0].data_inicio?.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1')}`} 
+                                        </span>
+                                        <button
+                                            id={campanha.id_transacao}
+                                            onClick={(e) => handleCancelar(e)}
+                                            className="bg-second-pink text-white font-bold px-4 py-2 rounded-lg text-sm hover:bg-second-pink-hover">
+                                            Cancelar
+                                        </button>
+                                    </li>
+                                ))
+                            }
                         </div>
 
                         {/* Enviar comprovante */}
