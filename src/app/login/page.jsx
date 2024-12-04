@@ -6,6 +6,7 @@ import Link from "next/link";
 import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
 import Instrucoes from "@/components/Instrucao";
+import { getRestaurantes, getVoluntarios } from "@/services/api";
 
 
 // FALTA LIGAR COM O BACK 
@@ -17,29 +18,52 @@ export default function Login() {
     // criação de variavel (vazias ('')), para receber os valores do input digitado pelo user
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [confirmaDados, setConfirmaDados] = useState(true)
 
     // função para fazer o envio do formulario
     const handleSubmit = (event) => {
-        //event previne que o form seja enviado e a page atualizada, logo, conseguimos monitorar os dados que são passados pelo formulario 
-        event.preventDefault()
-
         // Expressões regulares para validação dos dados do input
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // Exemplo de regex para senha forte
+        setConfirmaDados(true)
 
         // Validando se o email está conforme padrão estabelecido no emailRegex, caso esteja diferente mostra o alert com a negativa
         if (!emailRegex.test(email)) {
             alert("Por favor, insira um email válido.")
+            setConfirmaDados(false)
+
             return;
         }
 
         // Validando se a senha está conforme padrão estabelecido no passwordRegex, caso esteja diferente mostra o alert com a negativa
         if (!passwordRegex.test(password)) {
             alert("A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.");
+            setConfirmaDados(false)
             return;
         }
-        // Test1234
-        console.log("Dados válidos:", email, password);
+
+        const findUser = async () => {
+            const restaurantes = await getRestaurantes();
+            const voluntarios = await getVoluntarios();
+
+            const userRestaurante = restaurantes.filter((restaurante) => restaurante.email == email)
+            const userVoluntario = voluntarios.filter((voluntario) => voluntario.email == email)
+
+            if(userRestaurante.length > 0) {
+                localStorage.setItem('ID', userRestaurante[0].id_restaurante)
+                window.location.href = '/perfilRestaurante'
+            } else {
+                localStorage.setItem('ID', userVoluntario[0].id_voluntario)
+                window.location.href = '/perfilVoluntario'
+
+            }
+            
+
+        }
+        
+        if(confirmaDados) {
+            findUser()
+        }
     }
 
 
@@ -110,10 +134,9 @@ export default function Login() {
                     <label className="flex gap-1"><input type="checkbox" /> Lembrar de mim</label>
                     <p> Esqueceu sua senha? <a href="/recuperarSenha"><span className="font-bold text-second-green hover:underline">Recuperar senha.</span></a></p>
                 </div>
-
-                <Link href="/perfilRestaurante"> 
-                    <button className=" px-32 lg:px-[200px] bg-second-pink text-white h-10 rounded-lg transition hover:bg-second-pink-hover">Entrar</button>
-                </Link>
+                    <button 
+                    className=" px-32 lg:px-[200px] bg-second-pink text-white h-10 rounded-lg transition hover:bg-second-pink-hover"
+                    onClick={() => handleSubmit()}>Entrar</button>
             </form>
         </div>
     </div>

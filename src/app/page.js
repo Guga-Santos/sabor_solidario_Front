@@ -11,6 +11,8 @@ import User2 from '../assets/Ellipse 6.svg'
 import User3 from '../assets/Ellipse 7.svg'
 import star from '../assets/star.svg'
 import { Menu, CircleChevronRight, Facebook, Instagram, Twitter, CircleChevronLeft } from 'lucide-react'
+import getData, { cadastrarRestaurante } from '@/services/api';
+
 
 export default function Home() {
 
@@ -60,6 +62,16 @@ export default function Home() {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    
+
+    // const get = async (URL) => {
+    //   const response = await getData("http://127.0.0.1:8000/api/restaurantes/")
+    //   console.log(response)
+    // }
+    // get()
+  }, [])
 
   return (
     <div className="container h-screen w-screen min-w-screen">

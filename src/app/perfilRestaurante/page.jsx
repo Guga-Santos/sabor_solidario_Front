@@ -1,14 +1,26 @@
 'use client'
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from '../../assets/login-login-teste.svg'
 import imagensUser from '../../assets/bg-heeerosectionsvg.svg'
 import fotoRestaurante from '../../assets/food.svg'
 import { Plus, UserPen, CalendarDays, LaptopMinimalCheck, FileClock, LogOut } from 'lucide-react'
+import { getRestauranteByID } from "@/services/api";
 
 export default function PerfilRestaurante() {
+    useEffect(() => {
+        const restaurante = async () => {
+            const id = localStorage.getItem('ID')
+            console.log('ID:', id)
+            const user = await getRestauranteByID(id)
+            console.log(user)
+            setUserRest(user)
+        }
+
+        restaurante()
+    }, []) 
 
     // criando as variáveis usando useState para armazenar e poder manipular, ela começa varia e quando o valor é alterado, é armanezada seguindo a lista na "setFormData".
     // campanhas, armazena uma lista de campanhas.. assim que uma nova campanha é adicionada, é inserida nesse estado "setCampanhas".
@@ -21,6 +33,7 @@ export default function PerfilRestaurante() {
         validade: "",
     });
     const [campanhas, setCampanhas] = useState([]);
+    const [userRest, setUserRest] = useState("");
 
 
     // Lidar com inputs do formulário -  lógica que permite que os campos do formulário sejam controlados pelo React, garantindo a sincronização entre o valor exibido e o estado.
@@ -100,8 +113,8 @@ export default function PerfilRestaurante() {
 
                     <div className="flex gap-3 items-center">
                         <div className="flex flex-col items-end">
-                            <h4 className="font-bold text-second-green-hover text-sm lg:text-base">Manubs fest</h4>
-                            <span className="text-xs font-semibold lg:text-sm">000.000.0001-11</span>
+                            <h4 className="font-bold text-second-green-hover text-sm lg:text-base">{userRest?.nome_fantasia}</h4>
+                            <span className="text-xs font-semibold lg:text-sm">{userRest?.CNPJ}</span>
                         </div>
                         <Image
                             src={fotoRestaurante}

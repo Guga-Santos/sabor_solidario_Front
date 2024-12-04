@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from "next/image";
 import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
+import getData, { cadastrarVoluntarios } from '@/services/api';
 
 
 export default function CadastroVoluntario() {
@@ -26,6 +27,7 @@ export default function CadastroVoluntario() {
     const [confirmaPassword, setConfirmaPassword] = useState('')
     const [nomeGrupo, setNomeGrupo] = useState('')
     const [telefoneGrupo, setConfirmaTelefoneRepresentante] = useState('')
+    const [confirmaDados, setConfirmaDados] = useState(true)
 
     const [data, setData] = useState(false)
     const [confirma, setConfirma] = useState(0)
@@ -41,7 +43,9 @@ export default function CadastroVoluntario() {
             } else {
                 setConfirma(confirma -1)
             }
-        } 
+        }
+
+
     
         useEffect(() => {
             // chamado do arquivo restaurante.json - mock
@@ -62,22 +66,54 @@ export default function CadastroVoluntario() {
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
     
             console.log("Dados de cadastro:", email, password)
+
+            setConfirmaDados(true)
     
     
             if (email && !emailRegex.test(email)) {
                 alert("Por favor, insira um email válido.")
+                setConfirmaDados(false)
             }
     
             if (!(email == confirmaEmail)) {
                 alert("Os emails devem coincidir.")
+                setConfirmaDados(false)
             }
     
             if (!passwordRegex.test(password)) {
                 alert("A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.");
+                setConfirmaDados(false)
             }
     
             if (confirmaPassword && !(password == confirmaPassword)) {
                 alert("As senhas devem coincidir.")
+                setConfirmaDados(false)
+            }
+
+            if (confirmaDados) {
+                const post = async (data) => {
+                    const response = await cadastrarVoluntarios(data);
+                    console.log(response)
+                }
+
+                post({
+                    "nome": nomeCompleto,
+                    "CPF": cpf,
+                    "telefone": telefone,
+                    "grupo": nomeGrupo,
+                    "email": email,
+                    "senha": password,
+                    "endereco": {
+                        "rua": nomeRua,
+                        "numero": numeroRua,
+                        "complemento": complemento,
+                        "bairro": bairro,
+                        "cidade": cidade,
+                        "estado": "PE",
+                        "cep": cep
+                    }
+                })
+
             }
         }
 
@@ -136,7 +172,7 @@ export default function CadastroVoluntario() {
                     className="bg-second-pink text-white hover:bg-second-pink-hover hover:scale-105 transition-all w-[100%] h-[55px] rounded-xl font-bold mt-2"
                     type="button" 
                     value="cadastrar" 
-                    onClick={() => handleChange}>
+                    onClick={() => handleChange()}>
                         Cadastre-se
                     </button>
                 </div>

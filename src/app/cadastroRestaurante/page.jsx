@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from "next/image";
 import logo from '../../assets/login-login-teste.svg'
 import voltar from '../../assets/botao-voltar.svg'
+import { cadastrarRestaurante } from '@/services/api';
 import * as dados from "../mock/restaurante.json"
 
 
@@ -26,6 +27,7 @@ export default function CadastroRestaurante() {
     const [confirmaEmail, setConfirmaEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmaPassword, setConfirmaPassword] = useState('')
+    const [confirmaDados, setConfirmaDados] = useState(true)
 
     const [data, setData] = useState(false)
     const [confirma, setConfirma] = useState(0)
@@ -42,6 +44,8 @@ export default function CadastroRestaurante() {
             setConfirma(confirma - 1)
         }
     }
+
+    
 
     useEffect(() => {
         // chamado do arquivo restaurante.json - mock
@@ -62,10 +66,12 @@ export default function CadastroRestaurante() {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
         console.log("Dados de cadastro:", email, password)
+        setConfirmaDados(true)
 
 
         if (email && !emailRegex.test(email)) {
             alert("Por favor, insira um email válido.")
+            setConfirmaDados(false)
         }
 
         if (!(email == confirmaEmail)) {
@@ -74,10 +80,37 @@ export default function CadastroRestaurante() {
 
         if (!passwordRegex.test(password)) {
             alert("A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números.");
+            setConfirmaDados(false)
         }
 
         if (confirmaPassword && !(password == confirmaPassword)) {
             alert("As senhas devem coincidir.")
+            setConfirmaDados(false)
+        }
+
+        if (confirmaDados) {
+            const post = async (data) => {
+                const response = await cadastrarRestaurante(data);
+                return response;
+              }
+          
+              post({
+                "razao_social": razaoSocial,
+                "nome_fantasia": nomeFantasia,
+                "CNPJ": cnpj,
+                "telefone": telefone,
+                "email": email,
+                "senha": password,
+                "endereco": {
+                    "rua": nomeRua,
+                    "numero": numeroRua,
+                    "complemento": complemento,
+                    "bairro": bairro,
+                    "cidade": cidade,
+                    "estado": "PE",
+                    "cep": cep
+                }
+            })
         }
     }
 
